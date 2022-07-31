@@ -1,4 +1,5 @@
 import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 
 const styles = StyleSheet.create({
     container: {
@@ -6,13 +7,14 @@ const styles = StyleSheet.create({
     },
 })
 
-
 const Login = () => {
     return(
-        <View style={styles.container}>
-            <Typography>
+        <View
+            style={styles.container}
+        >
+            <Text>
                 {'Hello, we are looking for pets'}
-            </Typography>
+            </Text>
         </View>
     )
 }
