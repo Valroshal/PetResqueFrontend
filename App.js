@@ -8,7 +8,7 @@
 
 import * as React from 'react';
 import {SafeAreaView, StyleSheet, Text} from 'react-native';
-import TopLogo from './src/containers/components/TopLogo/TopLogo';
+import AddRemoveCard from './src/containers/components/AdddRemoveCard/AddRemoveCard.tsx';
 
 const styles = StyleSheet.create({
   sectionContainer: {
@@ -29,10 +29,20 @@ const styles = StyleSheet.create({
   },
 });
 
+const choices = [
+  { upperText: "Add lost pet" , lowText: "I`ve lost my pet and\n" +
+        "want to find it" },
+  { upperText: "Add found pet" , lowText: "I`ve found a pet\n" +
+        "and looking for it`s owners"}
+  ];
+
+
+
+
 const App = () => {
   return (
     <SafeAreaView>
-      <TopLogo />
+      <AddRemoveCard upperText = {choices[0].upperText} lowerText = {choices[0].lowText}/>
     </SafeAreaView>
   );
 };
