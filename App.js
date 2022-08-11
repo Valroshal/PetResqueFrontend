@@ -6,9 +6,11 @@
  * @flow strict-local
  */
 
+
 import * as React from 'react';
 import {SafeAreaView, StyleSheet, Text} from 'react-native';
 import AddRemoveCard from './src/containers/components/AdddRemoveCard/AddRemoveCard.tsx';
+
 
 const styles = StyleSheet.create({
   sectionContainer: {
