@@ -10,6 +10,8 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
     } as ViewStyle,
     container: {
+        paddingTop: 20,
+        paddingBottom: 20,
         justifyContent: 'center',
         alignItems: "flex-start",
     } as ViewStyle,
