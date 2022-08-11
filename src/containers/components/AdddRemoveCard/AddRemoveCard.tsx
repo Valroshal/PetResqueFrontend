@@ -1,36 +1,34 @@
 import * as React from 'react';
 import {StyleSheet, ViewStyle, TextStyle, Text, View} from 'react-native';
-import {ReactComponent as Plus } from '../../../assets/svg/Plus.svg';
-
+import Plus from '../../../assets/svg/plus.svg';
 
 const styles = StyleSheet.create({
     card: {
         alignItems: 'center',
-        width: 300,
-        height: 194,
-        justifyContent: 'center',
-        marginLeft: 'auto',
-        marginRight: 'auto',
         borderRadius: 8,
+        borderWidth: 1,
         borderColor: 'gray',
     } as ViewStyle,
-    container: {} as ViewStyle,
+    container: {
+        justifyContent: 'center',
+        alignItems: "flex-start",
+    } as ViewStyle,
     upperText: {
         fontSize: 32,
         fontFamily: 'Lato',
         color: '#28230E',
         fontWeight: 'normal',
-        textAlign: 'center',
+        textAlign: 'left',
     } as TextStyle,
     lowerText: {
         fontSize: 20,
         fontFamily: 'Lato-Regular',
         color: '#595959',
         fontWeight: 'normal',
-        justifyContent: 'center',
-        textAlign: 'center',
+        textAlign: 'left',
     } as TextStyle,
 });
+
 interface Props{
     upperText: string
     lowerText: string
@@ -41,14 +39,14 @@ const AddRemoveCard: React.FC<Props> = ({upperText,lowerText}) => {
     return (
         <View style={styles.card}>
             <View style={styles.container}>
-                <View>
+                <View style={{marginBottom: 4}}>
                     <Text style={styles.upperText}>{upperText}</Text>
                 </View>
-                <View style={{width: 150}}>
+                <View style={{marginBottom: 16}}>
                     <Text style={styles.lowerText}>{lowerText}</Text>
                 </View>
                 <View>
-                    <Plus />
+                    {/*<Plus width={50} height={50} />*/}
                 </View>
             </View>
         </View>

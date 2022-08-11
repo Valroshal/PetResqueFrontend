@@ -9,7 +9,7 @@
 
 import * as React from 'react';
 import {SafeAreaView, StyleSheet, Text} from 'react-native';
-import AddRemoveCard from './src/containers/components/AdddRemoveCard/AddRemoveCard.tsx';
+import AddPetFirst from './src/containers/AddPetFirst/AddPetFirst';
 
 
 const styles = StyleSheet.create({
@@ -31,20 +31,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const choices = [
-  { upperText: "Add lost pet" , lowText: "I`ve lost my pet and\n" +
-        "want to find it" },
-  { upperText: "Add found pet" , lowText: "I`ve found a pet\n" +
-        "and looking for it`s owners"}
-  ];
-
-
-
 
 const App = () => {
   return (
     <SafeAreaView>
-      <AddRemoveCard upperText = {choices[0].upperText} lowerText = {choices[0].lowText}/>
+      <AddPetFirst />
     </SafeAreaView>
   );
 };
