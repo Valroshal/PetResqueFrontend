@@ -6,8 +6,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 5,
     justifyContent: 'center',
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    //marginLeft: 'auto',
+    //marginRight: 'auto',
   } as ViewStyle,
   title: {
     fontSize: 36,

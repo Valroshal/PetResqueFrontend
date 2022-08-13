@@ -9,12 +9,17 @@ const AddPetFirst = () => {
           <TopLogo />
           <View style={{marginTop:22 , padding: 30}}>
               <View style={{marginBottom: 40}}>
-                <AddRemoveCard upperText={"Add lost pet"} lowerText={"I`ve lost my pet and\n" +
-                  "want to find it"} />
+                <AddRemoveCard
+                    upperText="Add lost pet"
+                    lowerText="I`ve lost my pet and want to find it"
+                />
               </View>
-              <AddRemoveCard upperText={"Add found pet"} lowerText={"I`ve found a pet \n" +
-                  "and looking for it`s owners"} />
-
+              <View>
+                  <AddRemoveCard
+                      upperText="Add found pet"
+                      lowerText="I`ve found a pet and looking for it`s owners"
+                  />
+              </View>
           </View>
       </View>
   )
