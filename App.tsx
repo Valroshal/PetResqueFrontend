@@ -1,5 +1,4 @@
 import React from 'react';
-import type {Node} from 'react';
 import Login from "./src/containers/Login/Login";
 import {NavigationContainer} from "@react-navigation/native";
 
