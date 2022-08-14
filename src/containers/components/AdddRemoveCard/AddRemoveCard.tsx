@@ -1,6 +1,7 @@
 import * as React from 'react';
-import {StyleSheet, ViewStyle, TextStyle, Text, View} from 'react-native';
+import {StyleSheet, ViewStyle, TextStyle, Text, View, TouchableOpacity} from 'react-native';
 import Plus from '../../../assets/svg/plus.svg';
+import {useState} from "react";
 
 const styles = StyleSheet.create({
     card: {
@@ -35,10 +36,12 @@ const styles = StyleSheet.create({
 interface Props{
     upperText: string
     lowerText: string
+
 }
 
 
 const AddRemoveCard: React.FC<Props> = ({upperText,lowerText}) => {
+
     return (
         <View style={styles.card}>
             <View style={{marginBottom: 4}}>
