@@ -48,20 +48,23 @@ const styles = StyleSheet.create({
 interface Props{
     upperText: string
     lowerText: string
-    onPress: Function
+    onPressCard: Function
 }
 
 
-const AddRemoveCard: React.FC<Props> = ({upperText,lowerText, onPress}) => {
-    const [isPressed, setIsPressed] = useState<boolean>(false)
+const AddRemoveCard: React.FC<Props> = ({upperText,lowerText, onPressCard}) => {
+    const [isCardPressed, setIsCardPressed] = useState<boolean>(false)
 
-    const _onPressed = () => {
-        setIsPressed(true)
-        onPress();
+    const handlePressCard = () => {
+        setIsCardPressed(true)
+        onPressCard();
     }
 
     return (
-        <TouchableOpacity style={isPressed ? styles.cardPressed : styles.card} onPress={_onPressed}>
+        <TouchableOpacity
+            style={isCardPressed ? styles.cardPressed : styles.card}
+            onPress={handlePressCard}
+        >
             <View style={{marginBottom: 4}}>
                 <Text style={styles.upperText}>{upperText}</Text>
             </View>

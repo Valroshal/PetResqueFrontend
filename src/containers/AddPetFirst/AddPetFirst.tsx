@@ -20,7 +20,7 @@ const AddPetFirst = () => {
                   <AddRemoveCard
                       upperText="Add lost pet"
                       lowerText="I`ve lost my pet and want to find it"
-                      onPress= {lostPet}
+                      onPressCard= {lostPet}
                   />
 
           </View>
