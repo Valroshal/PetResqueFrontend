@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {TouchableHighlight, TouchableOpacity, View} from "react-native";
 import TopLogo from "../components/TopLogo/TopLogo";
-import AddRemoveCard from "./AdddRemoveCard/AddRemoveCard";
+import AddRemoveCard from "./components/AdddRemoveCard/AddRemoveCard";
 
 const AddPetFirst = () => {
     const lostPet = () => {
@@ -29,7 +29,7 @@ const AddPetFirst = () => {
                   <AddRemoveCard
                       upperText="Add found pet"
                       lowerText="I`ve found a pet and looking for it`s owners"
-                      onPress={foundPet}
+                      onPressCard={foundPet}
                   />
           </View>
       </View>

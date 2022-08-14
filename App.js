@@ -9,7 +9,7 @@
 
 import * as React from 'react';
 import {SafeAreaView, StyleSheet, Text} from 'react-native';
-import AddPetFirst from './src/containers/AddPetFirst/AddPetFirst';
+import GlobalBtn from './src/containers/components/GlobalBtn/GlobalBtn';
 
 
 const styles = StyleSheet.create({
@@ -33,9 +33,19 @@ const styles = StyleSheet.create({
 
 
 const App = () => {
+
+  const handlePressBtn = () => {
+    console.log("bla bla");
+  }
+
   return (
     <SafeAreaView>
-      <AddPetFirst />
+      <GlobalBtn
+          innerText="Yes, my pet is lost"
+          innerTextColor="black"
+          backGroundColor="#B8B8B8"
+          onPressButton={handlePressBtn}
+      />
     </SafeAreaView>
   );
 };
