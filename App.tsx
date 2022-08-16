@@ -12,7 +12,8 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="AddPetFirst" component={AddPetFirst} />
-            <Stack.Screen name="DateTimePicker" component={DateTimePicker} />
+          <Stack.Screen name="DateTimePicker" component={DateTimePicker} />
+          <Stack.Screen name="Login" component={Login} />
         </Stack.Navigator>
       </NavigationContainer>
   );
