@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {View} from "react-native";
 import TopLogo from "../components/TopLogo/TopLogo";
-import AddRemoveCard from "./AdddRemoveCard/AddRemoveCard";
+import AddRemoveCard from "./components/AdddRemoveCard/AddRemoveCard";
 import DateTimePicker from "../components/DateTimePicker/DateTimePicker";
 
 interface Props{
