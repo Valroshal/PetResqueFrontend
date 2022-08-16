@@ -29,7 +29,8 @@ interface Props{
 
 
 const AddDate: React.FC<Props> = ({navigation}) => {
-  const x = () => {
+  const addDateTime = () => {
+      console.log("Clicked Add Date");
       navigation.navigate('DatePicker')
   }
 
@@ -45,10 +46,9 @@ const AddDate: React.FC<Props> = ({navigation}) => {
                   Please pick the date you've last seen the pet
               </Text>
           </View>
-          <TouchableOpacity style={styles.btn} >
+          <TouchableOpacity style={styles.btn} onPress={addDateTime}>
               <Text style={{
                   padding: 10, fontSize: 16, fontFamily:'Lato' , color: '#6C6C6C'}}
-
               >
                   Pick a date and time (Required)*
               </Text>
