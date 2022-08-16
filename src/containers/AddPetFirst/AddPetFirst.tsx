@@ -2,6 +2,7 @@ import * as React from 'react';
 import {View} from "react-native";
 import TopLogo from "../components/TopLogo/TopLogo";
 import AddRemoveCard from "./AdddRemoveCard/AddRemoveCard";
+import DateTimePicker from "../components/DateTimePicker/DateTimePicker";
 
 interface Props{
     navigation: any
@@ -10,11 +11,11 @@ interface Props{
 const AddPetFirst: React.FC<Props> = ({navigation}) => {
     const lostPet = () => {
         console.log("Clicked lost Pet");
-        navigation.navigate('Login')
+        navigation.navigate('DateTimePicker')
     }
     const foundPet = () => {
         console.log("Clicked FOUND Pet");
-        navigation.navigate('Login')
+        navigation.navigate('DateTimePicker')
     }
 
   return(
@@ -35,7 +36,7 @@ const AddPetFirst: React.FC<Props> = ({navigation}) => {
                   <AddRemoveCard
                       upperText="Add found pet"
                       lowerText="I`ve found a pet and looking for it`s owners"
-                      onPress={foundPet}
+                      onPressCard={foundPet}
                   />
           </View>
       </View>
