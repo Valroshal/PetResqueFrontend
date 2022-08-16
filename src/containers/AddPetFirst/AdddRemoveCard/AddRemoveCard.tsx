@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StyleSheet, ViewStyle, TextStyle, Text, View, TouchableHighlight, TouchableOpacity} from 'react-native';
+import {StyleSheet, ViewStyle, TextStyle, Text, View, TouchableOpacity} from 'react-native';
 import Plus from '../../../assets/svg/plus.svg';
 import {useState} from "react";
 

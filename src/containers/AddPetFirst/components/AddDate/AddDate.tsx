@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
     subtitle: {
         justifyContent: "flex-start",
         paddingHorizontal: 20,
-        paddingBottom: 12,
+        // paddingBottom: 12,
+        paddingRight: 70,
     } as ViewStyle,
     btn: {
         margin: 20,
@@ -32,7 +33,6 @@ const AddDate: React.FC<Props> = ({navigation}) => {
       navigation.navigate('DatePicker')
   }
 
-
   return(
       <View >
           <View style={styles.title}>
@@ -45,9 +45,10 @@ const AddDate: React.FC<Props> = ({navigation}) => {
                   Please pick the date you've last seen the pet
               </Text>
           </View>
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity style={styles.btn} >
               <Text style={{
                   padding: 10, fontSize: 16, fontFamily:'Lato' , color: '#6C6C6C'}}
+
               >
                   Pick a date and time (Required)*
               </Text>
