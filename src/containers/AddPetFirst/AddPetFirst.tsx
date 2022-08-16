@@ -10,7 +10,7 @@ interface Props{
 const AddPetFirst: React.FC<Props> = ({navigation}) => {
     const lostPet = () => {
         console.log("Clicked lost Pet");
-        navigation.navigate('Login')
+        navigation.navigate('AddDate')
     }
     const foundPet = () => {
         console.log("Clicked FOUND Pet");
@@ -35,7 +35,7 @@ const AddPetFirst: React.FC<Props> = ({navigation}) => {
                   <AddRemoveCard
                       upperText="Add found pet"
                       lowerText="I`ve found a pet and looking for it`s owners"
-                      onPress={foundPet}
+                      onPressCard={foundPet}
                   />
           </View>
       </View>
