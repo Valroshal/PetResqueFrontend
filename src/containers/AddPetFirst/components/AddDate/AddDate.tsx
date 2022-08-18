@@ -1,6 +1,5 @@
 import * as React from "react";
 import {StyleSheet, Text, TouchableOpacity, View, ViewStyle} from "react-native";
-import DatePicker from "react-native-date-picker";
 import DateTimePicker from "../../../components/DateTimePicker/DateTimePicker";
 import {useState} from "react";
 
@@ -55,18 +54,14 @@ const AddDate: React.FC<Props> = ({navigation}) => {
               </Text>
           </View>
           <TouchableOpacity style={styles.btn} onPress={addDateTime}>
-              <Text style={{
-                  padding: 10, fontSize: 16, fontFamily:'Lato' , color: '#6C6C6C'}}
-              >
+              <Text style={{ padding: 10, fontSize: 16, fontFamily:'Lato' , color: '#6C6C6C'}} >
                   Pick a date and time (Required)*
               </Text>
-
           </TouchableOpacity>
 
           {isOpen && <DateTimePicker openStatus={isOpen} handlerOpenStatus={changeOpenStatus}/>}
-
       </View>
-  )
+    )
 }
 
 export default AddDate;
