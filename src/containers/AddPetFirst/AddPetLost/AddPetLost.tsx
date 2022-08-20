@@ -46,15 +46,19 @@ const AddPetLost: React.FC<Props> = ({name, navigation}) => {
         navigation.navigate('AddPetFirst')
     }
 
-    state = {
-        photo: null
-    };
-    const handleChoosePhoto = () => {
-        const options = {
-            noData: true
+    // state = {
+    //     photo: null
+    // };
+
+    const handleChoosePhoto = (type) => {
+        let options = {
+            mediaType: type,
+            maxWidth: 300,
+            maxHeight: 550,
+            quality: 1,
         };
         ImagePicker.launchImageLibrary( options, response => {
-            console.log("response", response);
+            console.log("response", response)
         })
     };
 
@@ -81,7 +85,7 @@ const AddPetLost: React.FC<Props> = ({name, navigation}) => {
                 </Text>
                 <TouchableOpacity style={styles.btnPhoto} onPress={handleChoosePhoto}>
                     {/*<Image style={styles.imageStyle}*/}
-                    {/*       source={require('/src/assets/images/casual-life-3d-cat-standing 1.png')} />*/}
+                    {/*       source={require('/src/assets/images/camera.png')} />*/}
                     <Text style={{fontSize: 20, fontFamily:'Lato', color: '#28230E'}}>
                         Add Photos
                     </Text>
