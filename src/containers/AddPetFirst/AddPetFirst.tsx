@@ -14,7 +14,7 @@ const AddPetFirst: React.FC<Props> = ({navigation}) => {
     }
     const foundPet = () => {
         console.log("Clicked FOUND Pet");
-        navigation.navigate('Login')
+        navigation.navigate('AddpetLost')
     }
 
   return(
@@ -35,7 +35,7 @@ const AddPetFirst: React.FC<Props> = ({navigation}) => {
                   <AddRemoveCard
                       upperText="Add found pet"
                       lowerText="I`ve found a pet and looking for it`s owners"
-                      onPress={foundPet}
+                      onPressCard={foundPet}
                   />
           </View>
       </View>

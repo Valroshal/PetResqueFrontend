@@ -1,5 +1,7 @@
 import * as React from "react";
-import {StyleSheet, Text, TouchableOpacity, View, ViewStyle} from "react-native";
+import {Image, StyleSheet, Text, TouchableOpacity, View, ViewStyle} from "react-native";
+import ImagePicker, { ImageLibraryOptions } from 'react-native-image-picker';
+
 
 
 const styles = StyleSheet.create({
@@ -20,6 +22,15 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#DDDDDD',
     } as ViewStyle,
+    btnPhoto:{
+        padding: 10,
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: '#28230E',
+    } as ViewStyle,
+    imageStyle: {
+
+    }
 })
 
 interface Props{
@@ -34,6 +45,18 @@ const AddPetLost: React.FC<Props> = ({name, navigation}) => {
     const addPetType = () => {
         navigation.navigate('AddPetFirst')
     }
+
+    state = {
+        photo: null
+    };
+    const handleChoosePhoto = () => {
+        const options = {
+            noData: true
+        };
+        ImagePicker.launchImageLibrary( options, response => {
+            console.log("response", response);
+        })
+    };
 
     return (
         <View>
@@ -56,13 +79,25 @@ const AddPetLost: React.FC<Props> = ({name, navigation}) => {
                 <Text style={{fontSize: 20, fontFamily:'Lato' , color: '#000'}}>
                     Add Photos
                 </Text>
+                <TouchableOpacity style={styles.btnPhoto} onPress={handleChoosePhoto}>
+                    {/*<Image style={styles.imageStyle}*/}
+                    {/*       source={require('/src/assets/images/casual-life-3d-cat-standing 1.png')} />*/}
+                    <Text style={{fontSize: 20, fontFamily:'Lato', color: '#28230E'}}>
+                        Add Photos
+                    </Text>
+                </TouchableOpacity>
             </View>
+
             <View style={styles.title}>
                 <Text style={{fontSize: 20, fontFamily:'Lato' , color: '#000'}}>
                     Description
                 </Text>
             </View>
-
+            <View>
+                <Text style={{fontSize: 16, fontFamily:'Lato' , color: '#595959'}}>
+                    Here you can describe color, size, breed of the pet
+                </Text>
+            </View>
         </View>
     )
 }
