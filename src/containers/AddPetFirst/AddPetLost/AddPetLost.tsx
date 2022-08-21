@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Image, StyleSheet, Text, TouchableOpacity, View, ViewStyle} from "react-native";
-import ImagePicker, { ImageLibraryOptions } from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-picker';
 
 
 
@@ -50,9 +50,8 @@ const AddPetLost: React.FC<Props> = ({name, navigation}) => {
     //     photo: null
     // };
 
-    const handleChoosePhoto = (type) => {
+    const handleChoosePhoto = () => {
         let options = {
-            mediaType: type,
             maxWidth: 300,
             maxHeight: 550,
             quality: 1,
