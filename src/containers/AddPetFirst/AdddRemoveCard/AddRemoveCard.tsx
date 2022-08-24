@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StyleSheet, ViewStyle, TextStyle, Text, View, TouchableHighlight, TouchableOpacity} from 'react-native';
+import {StyleSheet, ViewStyle, TextStyle, Text, View, Image, TouchableOpacity} from 'react-native';
 import Plus from '../../../assets/svg/plus.svg';
 import {useState} from "react";
 
@@ -72,6 +72,7 @@ const AddRemoveCard: React.FC<Props> = ({upperText,lowerText, onPressCard}) => {
                 <Text style={styles.lowerText}>{lowerText}</Text>
             </View>
             <View>
+                <Image source={require('/Users/valerieHome/Documents/ReactNative/PetResque/src/assets/images/camera.png')} />
                 {/*<Plus width={50} height={50} />*/}
             </View>
         </TouchableOpacity>

@@ -9,6 +9,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import {useState} from "react";
+import {PetPhotoType} from "../../../types/PetType";
 const ImagePicker = require('react-native-image-picker');
 
 const styles = StyleSheet.create({
@@ -52,12 +53,13 @@ interface Props {
 }
 
 const AddPetLost: React.FC<Props> = ({navigation}) => {
-  const [photos , setPhotos] = useState([])
+  const [photos , setPhotos] = useState<PetPhotoType[]>([])
 
   const addPetType = () => {
     navigation.navigate('AddPetFirst');
   };
 
+  //comment
   const handleChoosePhoto = () => {
     let options = {
       selectionLimit: 0
@@ -72,10 +74,8 @@ const AddPetLost: React.FC<Props> = ({navigation}) => {
     });
   };
 
-
-
   return (
-    <View style={{paddingHorizontal: 20}}>
+    <View style={{padding: 20}}>
       <View style={styles.smallText}>
         <Text style={[styles.subTitleText, {color: '#28230E'}]}>
           Here are details of your dog - ֿMars. You can edit it here
@@ -110,9 +110,14 @@ const AddPetLost: React.FC<Props> = ({navigation}) => {
               )
             })
           }
-          <TouchableOpacity style={styles.btnPhoto} onPress={handleChoosePhoto}>
-            {/*<Image style={styles.imageStyle}*/}
-            {/*       source={require('/src/assets/images/camera.png')} />*/}
+          <TouchableOpacity
+              style={styles.btnPhoto}
+              onPress={handleChoosePhoto}
+          >
+            <Image
+                // style={styles.imageStyle}
+                source={require('/Users/valerieHome/Documents/ReactNative/PetResque/src/assets/images/camera.png')}
+            />
             <Text style={{fontSize: 20, fontFamily: 'Lato', color: '#28230E'}}>
               Add Photos
             </Text>
@@ -130,9 +135,15 @@ const AddPetLost: React.FC<Props> = ({navigation}) => {
           </Text>
         </View>
         <View style={styles.btn}>
-          <TextInput placeholderTextColor='#28230E'
-                     placeholder="Shy and fluffy, retriever"
-                     style={{padding: 10, paddingBottom: 150, fontSize: 16}}
+          <TextInput
+              multiline={true}
+              numberOfLines={4}
+              placeholderTextColor='#28230E'
+              placeholder="Shy and fluffy, retriever"
+              style={{
+                padding: 10,
+                fontSize: 16
+              }}
           >
           </TextInput>
         </View>
