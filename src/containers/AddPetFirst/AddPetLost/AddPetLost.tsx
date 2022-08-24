@@ -12,17 +12,16 @@ import {useState} from "react";
 const ImagePicker = require('react-native-image-picker');
 
 const styles = StyleSheet.create({
-  sub_title_text: {
+  subTitleText: {
     fontSize: 16,
     fontFamily: 'Lato',
   } as TextStyle,
-  title_text: {
+  titleText: {
     fontSize: 20,
     fontFamily: 'Lato',
   } as TextStyle,
   container: {
     justifyContent: 'flex-start',
-    paddingHorizontal: 20,
     marginBottom: 40,
   } as ViewStyle,
   title: {
@@ -31,7 +30,6 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   smallText: {
     justifyContent: 'flex-start',
-    paddingLeft: 20,
     paddingRight: 70,
     paddingBottom: 15,
   } as ViewStyle,
@@ -65,15 +63,11 @@ const AddPetLost: React.FC<Props> = ({navigation}) => {
       selectionLimit: 0
     };
     ImagePicker.launchImageLibrary(options, (response: any) => {
-      console.log('response', response);
       if (response.didCancel) {
-        console.log('User cancelled photo picker');
         Alert.alert('You did not select any image');
       }
       else {
         setPhotos(response.assets);
-        console.log("set to photo: ", response);
-        console.log("photos" , photos);
       }
     });
   };
@@ -81,27 +75,27 @@ const AddPetLost: React.FC<Props> = ({navigation}) => {
 
 
   return (
-    <View>
+    <View style={{paddingHorizontal: 20}}>
       <View style={styles.smallText}>
-        <Text style={[styles.sub_title_text, {color: '#28230E'}]}>
+        <Text style={[styles.subTitleText, {color: '#28230E'}]}>
           Here are details of your dog - ֿMars. You can edit it here
         </Text>
       </View>
       <View style={styles.container}>
         <View style={styles.title}>
-          <Text style={[styles.title_text , { color: '#000'}]}>
+          <Text style={[styles.titleText , { color: '#000'}]}>
             Animal Type
           </Text>
         </View>
           <TouchableOpacity style={styles.btn} onPress={addPetType}>
-            <Text style={[styles.sub_title_text ,{padding: 13.5, color: '#6C6C6C'}]}>
+            <Text style={[styles.subTitleText ,{padding: 13.5, color: '#6C6C6C'}]}>
               Please choose type
             </Text>
           </TouchableOpacity>
       </View>
       <View style={styles.container}>
         <View style={styles.title}>
-          <Text style={[styles.title_text,{ color: '#000'}]}>
+          <Text style={[styles.titleText,{ color: '#000'}]}>
             Add Photos
           </Text>
         </View>
@@ -126,19 +120,19 @@ const AddPetLost: React.FC<Props> = ({navigation}) => {
       </View>
       <View style={styles.container} >
         <View style={styles.title}>
-          <Text style={[styles.title_text , {color: '#000'}]}>
+          <Text style={[styles.titleText , {color: '#000'}]}>
             Description
           </Text>
         </View>
         <View style={styles.smallText}>
-          <Text style={[styles.sub_title_text, {color: '#595959'}]}>
+          <Text style={[styles.subTitleText, {color: '#595959'}]}>
             Here you can describe color, size, breed of the pet
           </Text>
         </View>
         <View style={styles.btn}>
           <TextInput placeholderTextColor='#28230E'
                      placeholder="Shy and fluffy, retriever"
-                     style={ {padding: 10, paddingBottom: 150, fontSize: 16}}
+                     style={{padding: 10, paddingBottom: 150, fontSize: 16}}
           >
           </TextInput>
         </View>
