@@ -72,7 +72,7 @@ const AddRemoveCard: React.FC<Props> = ({upperText,lowerText, onPressCard}) => {
                 <Text style={styles.lowerText}>{lowerText}</Text>
             </View>
             <View>
-                <Image source={require('/Users/valerieHome/Documents/ReactNative/PetResque/src/assets/images/camera.png')} />
+                {/*<Image source={require('/Users/valerieHome/Documents/ReactNative/PetResque/src/assets/images/camera.png')} />*/}
                 {/*<Plus width={50} height={50} />*/}
             </View>
         </TouchableOpacity>
