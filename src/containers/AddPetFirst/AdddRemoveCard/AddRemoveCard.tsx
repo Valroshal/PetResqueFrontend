@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {StyleSheet, ViewStyle, TextStyle, Text, View, TouchableHighlight, TouchableOpacity} from 'react-native';
-import Plus from '../../../assets/svg/plus.svg';
+import {StyleSheet, ViewStyle, TextStyle, Text, View, TouchableHighlight, TouchableOpacity, Image} from 'react-native';
+import Plus from '../../../assets/images/plus.png';
 import {useState} from "react";
 
 const styles = StyleSheet.create({
@@ -72,7 +72,7 @@ const AddRemoveCard: React.FC<Props> = ({upperText,lowerText, onPressCard}) => {
                 <Text style={styles.lowerText}>{lowerText}</Text>
             </View>
             <View>
-                {/*<Plus width={50} height={50} />*/}
+                <Image source={Plus} />
             </View>
         </TouchableOpacity>
     );
