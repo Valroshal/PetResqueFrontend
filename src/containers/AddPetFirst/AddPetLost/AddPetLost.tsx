@@ -10,7 +10,10 @@ import {
 } from 'react-native';
 import {useState} from "react";
 import {PetPhotoType} from "../../../types/PetType";
+import camera from "src/assets/images/camera.png";
+
 const ImagePicker = require('react-native-image-picker');
+
 
 const styles = StyleSheet.create({
   subTitleText: {
@@ -96,9 +99,7 @@ const AddPetLost: React.FC<Props> = ({navigation}) => {
 
   return (
     <ScrollView
-        style={{flex:1}}
-        horizontal={true}
-        onContentSizeChange={onContentSizeChange}
+        contentContainerStyle={{ flexGrow: 1 }}
     >
       <View style={{padding: 20}}>
           <View style={styles.smallText}>
@@ -142,7 +143,7 @@ const AddPetLost: React.FC<Props> = ({navigation}) => {
                   onPress={handleChoosePhoto}
               >
                 <Image
-                    source={require('/Users/innagro/PetResqueFrontend/src/assets/images/camera.png')}
+                    source={camera}
                 />
                 <Text style={{fontSize: 20, fontFamily: 'Lato', color: '#28230E'}}>
                   Add Photos
