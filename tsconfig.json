@@ -17,7 +17,7 @@
     "src/**/**/*.ts",
     "src/**/*.tsx",
     "src/components",
-    "src/custom.d.ts"
+    "src/custom.d.ts",
   ],
   "exclude": [
     "node_modules",
