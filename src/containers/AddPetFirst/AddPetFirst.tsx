@@ -35,7 +35,7 @@ const AddPetFirst: React.FC<Props> = ({navigation}) => {
                   <AddRemoveCard
                       upperText="Add found pet"
                       lowerText="I`ve found a pet and looking for it`s owners"
-                      onPress={foundPet}
+                      onPressCard={foundPet}
                   />
           </View>
       </View>
