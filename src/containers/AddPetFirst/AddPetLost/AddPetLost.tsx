@@ -10,7 +10,8 @@ import {
 } from 'react-native';
 import {useState} from "react";
 import {PetPhotoType} from "../../../types/PetType";
-import camera from "src/assets/images/camera.png";
+import Camera from "../../../assets/images/camera.png";
+import Vector from "../../../assets/images/Vector.png";
 
 const ImagePicker = require('react-native-image-picker');
 
@@ -38,6 +39,8 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
   } as ViewStyle,
   btn: {
+    flexDirection: 'row',
+    justifyContent: "space-between",
     borderRadius: 8,
     borderWidth: 1,
     borderColor: '#DDDDDD',
@@ -72,9 +75,10 @@ interface Props {
 
 const AddPetLost: React.FC<Props> = ({navigation}) => {
   const [photos , setPhotos] = useState<PetPhotoType[]>([])
+  const [animalType , setAnimalType] = useState<string>("Please choose type")
 
   const addPetType = () => {
-    navigation.navigate('AddPetFirst');
+    navigation.navigate('PetType');
   };
 
   const onContentSizeChange = () => {
@@ -115,8 +119,12 @@ const AddPetLost: React.FC<Props> = ({navigation}) => {
             </View>
               <TouchableOpacity style={styles.btn} onPress={addPetType}>
                 <Text style={[styles.subTitleText ,{padding: 13.5, color: '#6C6C6C'}]}>
-                  Please choose type
+                  {animalType}
                 </Text>
+                <Image
+                    source={Vector}
+                    style={{marginHorizontal: 10 , marginVertical : 13.34}}
+                />
               </TouchableOpacity>
           </View>
           <View style={styles.container}>
@@ -143,7 +151,7 @@ const AddPetLost: React.FC<Props> = ({navigation}) => {
                   onPress={handleChoosePhoto}
               >
                 <Image
-                    source={camera}
+                    source={Camera}
                 />
                 <Text style={{fontSize: 20, fontFamily: 'Lato', color: '#28230E'}}>
                   Add Photos
