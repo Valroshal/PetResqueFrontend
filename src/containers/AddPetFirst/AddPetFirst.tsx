@@ -9,34 +9,34 @@ interface Props{
 
 const AddPetFirst: React.FC<Props> = ({navigation}) => {
     const lostPet = () => {
-        console.log("Clicked lost Pet");
         navigation.navigate('Login')
     }
     const foundPet = () => {
-        console.log("Clicked FOUND Pet");
         navigation.navigate('AddPetLost')
     }
 
   return(
-      <View style={{backgroundColor: 'white' , paddingHorizontal: 30, paddingTop: 46}}>
-          <View style={{marginBottom: 52}}>
-              <TopLogo/>
-          </View>
-          <View style={{marginBottom: 40}}>
-                  <AddRemoveCard
-                      upperText="Add lost pet"
-                      lowerText="I`ve lost my pet and want to find it"
-                      onPressCard= {lostPet}
-                  />
+      <View style={{flex: 1 ,backgroundColor: 'white'}} >
+          <View style={{paddingHorizontal: 30, paddingTop: 46}}>
+              <View style={{marginBottom: 52}}>
+                  <TopLogo/>
+              </View>
+              <View style={{marginBottom: 40}}>
+                      <AddRemoveCard
+                          upperText="Add lost pet"
+                          lowerText="I`ve lost my pet and want to find it"
+                          onPressCard= {lostPet}
+                      />
 
-          </View>
+              </View>
 
-          <View>
-                  <AddRemoveCard
-                      upperText="Add found pet"
-                      lowerText="I`ve found a pet and looking for it`s owners"
-                      onPressCard={foundPet}
-                  />
+              <View>
+                      <AddRemoveCard
+                          upperText="Add found pet"
+                          lowerText="I`ve found a pet and looking for it`s owners"
+                          onPressCard={foundPet}
+                      />
+              </View>
           </View>
       </View>
   )

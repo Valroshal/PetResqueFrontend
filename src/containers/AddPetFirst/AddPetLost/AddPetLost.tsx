@@ -8,7 +8,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {PetPhotoType} from "../../../types/PetType";
 import Camera from "../../../assets/images/camera.png";
 import Vector from "../../../assets/images/Vector.png";
@@ -77,8 +77,10 @@ interface Props {
 const AddPetLost: React.FC<Props> = ({navigation, route }) => {
   const [photos , setPhotos] = useState<PetPhotoType[]>([])
   const [animalType , setAnimalType] = useState<string>("Please choose type")
+
   useEffect(() =>
-      setAnimalType(route.params?.post), [route.params?.post]
+      {route.params?.post ? setAnimalType(route.params?.post) : null},
+      [route.params?.post]
   );
 
   const addPetType = () => {
@@ -86,11 +88,10 @@ const AddPetLost: React.FC<Props> = ({navigation, route }) => {
   };
 
   //comment
-  const handleChoosePhoto = () => {
+  const handleChoosePhoto = useCallback(() => {
     let options = {
       selectionLimit: 0,
     };
-    console.log("In function")
     ImagePicker.launchImageLibrary(options, (response: any) => {
       if (response.didCancel) {
         Alert.alert('You did not select any image');
@@ -99,7 +100,7 @@ const AddPetLost: React.FC<Props> = ({navigation, route }) => {
         setPhotos((photos) => [...photos,...response.assets]);
       }
     });
-  };
+  },[]);
 
   return (
     <ScrollView
