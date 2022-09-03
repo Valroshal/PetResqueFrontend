@@ -13,7 +13,7 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="AddPetFirst" component={AddPetFirst} />
-          <Stack.Screen name="AddpetLost" component={AddPetLost} />
+          <Stack.Screen name="AddPetLost" component={AddPetLost} />
           <Stack.Screen name="PetType" component={PetType} />
         </Stack.Navigator>
       </NavigationContainer>

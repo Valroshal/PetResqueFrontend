@@ -1,62 +1,51 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import RadioGroup, {RadioButtonProps} from 'react-native-radio-buttons-group';
-
+import {RADIO_BUTTONS_DATA} from "../../../consts/PetType";
 import {StyleSheet, View, ViewStyle} from "react-native";
+import * as R from 'ramda';
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: 'white',
         padding: 30 ,
         alignItems: "flex-start",
     } as ViewStyle,
 
 });
 
-const radioButtonsData: RadioButtonProps[] = [{
-    id: '1', // acts as primary key, should be unique and non-empty string
-    label: 'Cat',
-    value: 'option1'
-}, {
-    id: '2',
-    label: 'Dog',
-    value: 'option2'
-}, {
-    id: '3',
-    label: 'Hamster',
-    value: 'option3'
-}, {
-    id: '4',
-    label: 'Guinea Pig',
-    value: 'option4'
-}, {
-    id: '5',
-    label: 'Parrot',
-    value: 'option5'
-}, {
-    id: '6',
-    label: 'Turtle',
-    value: 'option6'
-}]
-
-
 interface Props {
     navigation: any;
-    animalType: string;
 }
 
-const PetType: React.FC<Props> = ({navigation, animalType}) =>{
-    const [radioButtons, setRadioButtons] = useState<RadioButtonProps[]>(radioButtonsData)
+const PetType: React.FC<Props> = ({navigation}) =>{
+    const [radioButtons, setRadioButtons] = useState<RadioButtonProps[]>(RADIO_BUTTONS_DATA)
+    const [radioChoice, setRadioChoice] = useState<string>("")
 
-    function onPressRadioButton(radioButtonsArray: RadioButtonProps[]) {
-        setRadioButtons(radioButtonsArray);
-        console.log("radio ", radioButtons );
-        navigation.navigate('AddpetLost');
+    const onPressRadioButton = (radioButtonsArray: RadioButtonProps[]) => {
+        setRadioButtons( radioButtonsArray );
+        console.log("radioButtonsArray", radioButtonsArray);
+        radioButtonsArray.find(button:any) => button.selected && button.selected == true)
+        // R.find(R.propEq("selected", true))(radioButtonsArray);
+        // for (let val of radioButtonsArray) {
+        //     if (val.selected == true) {
+        //         setRadioChoice( `${val.label}` )
+        //     }
+        // }
     }
+
+    const navigationBack = () => {
+             navigation.navigate( {
+                name: 'AddPetLost',
+                params: {post: radioChoice},
+                merge: true,
+            } );
+    }
+    useEffect(() => navigationBack,[radioChoice]);
 
     return (
         <View style={styles.container}>
             <RadioGroup
                 containerStyle={{alignItems: "flex-start"}}
-                // size={16}
                 radioButtons={radioButtons}
                 onPress={onPressRadioButton}
             />

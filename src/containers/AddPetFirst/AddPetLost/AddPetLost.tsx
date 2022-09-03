@@ -8,7 +8,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {PetPhotoType} from "../../../types/PetType";
 import Camera from "../../../assets/images/camera.png";
 import Vector from "../../../assets/images/Vector.png";
@@ -71,19 +71,19 @@ const styles = StyleSheet.create({
 
 interface Props {
   navigation: any;
+  route: any;
 }
 
-const AddPetLost: React.FC<Props> = ({navigation}) => {
+const AddPetLost: React.FC<Props> = ({navigation, route }) => {
   const [photos , setPhotos] = useState<PetPhotoType[]>([])
   const [animalType , setAnimalType] = useState<string>("Please choose type")
+  useEffect(() =>
+      setAnimalType(route.params?.post), [route.params?.post]
+  );
 
   const addPetType = () => {
     navigation.navigate('PetType');
   };
-
-  const onContentSizeChange = () => {
-
-  }
 
   //comment
   const handleChoosePhoto = () => {
@@ -103,7 +103,7 @@ const AddPetLost: React.FC<Props> = ({navigation}) => {
 
   return (
     <ScrollView
-        contentContainerStyle={{ flexGrow: 1 }}
+        contentContainerStyle={{ backgroundColor:'white' , flexGrow: 1 }}
     >
       <View style={{padding: 20}}>
           <View style={styles.smallText}>

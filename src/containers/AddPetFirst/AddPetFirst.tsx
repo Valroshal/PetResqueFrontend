@@ -14,11 +14,11 @@ const AddPetFirst: React.FC<Props> = ({navigation}) => {
     }
     const foundPet = () => {
         console.log("Clicked FOUND Pet");
-        navigation.navigate('AddpetLost')
+        navigation.navigate('AddPetLost')
     }
 
   return(
-      <View style={{paddingHorizontal: 30, paddingTop: 46}}>
+      <View style={{backgroundColor: 'white' , paddingHorizontal: 30, paddingTop: 46}}>
           <View style={{marginBottom: 52}}>
               <TopLogo/>
           </View>
