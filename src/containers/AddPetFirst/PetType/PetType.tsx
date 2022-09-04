@@ -19,26 +19,28 @@ interface Props {
 
 const PetType: React.FC<Props> = ({navigation}) =>{
     const [radioButtons, setRadioButtons] = useState<RadioButtonProps[]>(RADIO_BUTTONS_DATA)
-    const [radioChoice, setRadioChoice] = useState<string>("")
+    const [radioChoice, setRadioChoice] = useState<string>()
 
     const onPressRadioButton = useCallback((radioButtonsArray: RadioButtonProps[]) => {
         setRadioButtons( radioButtonsArray );
-        let choice = radioButtonsArray.find((button:any) => button.selected && button.selected == true);
-        if(!choice) throw new Error("Expected a radio button to be selected")
-        setRadioChoice(`${choice.label}`)
-    },[]);
+        const choice = radioButtonsArray.find((button:any) => button.selected && button.selected == true);
+        if(!choice) {
+            throw new Error("Expected a radio button to be selected")
+        }
+        setRadioChoice(choice.label)
+    },[radioButtons]);
 
     const navigationBack = useCallback(() => {
              navigation.navigate( {
                 name: 'AddPetLost',
-                params: {post: radioChoice},
+                params: {animalType : radioChoice},
                 merge: true,
             } );
     },[radioChoice]);
 
-    useEffect(() =>
-        navigationBack,[radioChoice]
-    );
+    useEffect(() => {
+        navigationBack()
+        },[radioChoice] );
 
     return (
         <View style={styles.container}>

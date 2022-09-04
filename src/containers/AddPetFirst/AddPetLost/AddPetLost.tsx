@@ -79,8 +79,8 @@ const AddPetLost: React.FC<Props> = ({navigation, route }) => {
   const [animalType , setAnimalType] = useState<string>("Please choose type")
 
   useEffect(() =>
-      {route.params?.post ? setAnimalType(route.params?.post) : null},
-      [route.params?.post]
+      {route.params?.animalType ? setAnimalType(route.params?.animalType) : null},
+      [route.params?.animalType]
   );
 
   const addPetType = () => {
