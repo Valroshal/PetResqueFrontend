@@ -7,7 +7,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-        width: 300,
         height: 48,
         borderRadius: 8
     } as ViewStyle
