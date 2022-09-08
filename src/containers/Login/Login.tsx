@@ -1,13 +1,14 @@
 import * as React from 'react';
-import {StyleSheet, Text, TextStyle, View, ViewStyle, TextInput} from 'react-native';
+import * as yup from 'yup';
+import {StyleSheet, Text, TextInput, TextStyle, View, ViewStyle} from 'react-native';
+import {Field, Formik} from 'formik';
 import TopLogo from "../components/TopLogo/TopLogo";
 import GlobalButton from "../components/GlobalButton/GlobalButton";
-import {useState} from "react";
 
 const styles = StyleSheet.create({
   container: {
     flex : 1,
-    backgroundColor: 'white',
+    backgroundColor: '#FFFFFF',
     paddingTop: 46,
   } as ViewStyle,
   innerContainer: {
@@ -15,23 +16,29 @@ const styles = StyleSheet.create({
     paddingTop: 91,
   } as ViewStyle,
   header: {
-      fontSize: 32,
-      fontFamily: 'Lato',
-      color: "#28230E",
-      alignItems: "center",
+    fontSize: 32,
+    fontFamily: 'Lato',
+    color: "#28230E",
+    alignItems: "center",
   }  as TextStyle,
   subHeader: {
-      fontSize: 16,
-      fontStyle: "normal",
-      color: "#28230E",
-      fontFamily: 'Lato',
-      fontWeight: "400",
+    fontSize: 16,
+    fontStyle: "normal",
+    color: "#28230E",
+    fontFamily: 'Lato',
+    fontWeight: "400",
   } as TextStyle,
   field: {
-      borderRadius: 8,
-      borderWidth: 1,
-      borderColor: '#8D8D8D',
-      marginBottom: 20,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: 'rgba(141, 141, 141, 0.15)',
+    marginBottom: 20,
+    shadowColor: '#000',
+    backgroundColor: "white" ,
+    shadowOffset: {width: 6, height: 6},
+    shadowRadius: 10,
+    shadowOpacity: 0.15,
+    elevation: 1,
   } as ViewStyle,
   inputText: {
     padding: 10,
@@ -40,29 +47,30 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily:'Lato' ,
     color: '#6C6C6C',
-  }
+  } as TextStyle,
+  errorText: {
+    fontSize: 10,
+    color: 'red',
+  },
 });
 
 
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [emailValidError, setEmailValidError] = useState('');
+
+  const loginValidationSchema = yup.object().shape({
+    email: yup
+    .string()
+    .email("Please enter valid email")
+    .required('Email Address is Required'),
+    password: yup
+    .string()
+    .min(8, ({ min }) => `Password must be at least ${min} characters`)
+    .required('Password is required'),
+  })
   
-  const handleValidEmail = ({val}: { val: any }) => {
-    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+  const handleSubmit = () => {
     
-    if (val.length === 0) {
-      setEmailValidError('email address must be enter');
-    } else if (!reg.test(val)) {
-      setEmailValidError('enter valid email address');
-    } else if (reg.test(val)) {
-      setEmailValidError('');
-    }
-  };
-  
-  const loginHandler = () => {
-  
   }
   
   return (
@@ -77,46 +85,67 @@ const Login = () => {
             'other pet lovers and help them to find and\n' +
             'return pets to their home'}
         </Text>
-        <View style={styles.field}>
-            <TextInput
-              placeholder="Email"
-              style={styles.inputText}
-              onChangeText={value => {
-                setEmail(value);
-                handleValidEmail({val: value});
-              }}
-            />
-        </View>
-        <View>
-          {emailValidError ? <Text>{emailValidError}</Text> : null}
-        </View>
-       
-        <View style={styles.field}>
-            <TextInput
-              placeholder="Password"
-              style={styles.inputText}
-            />
-        </View>
-        <View style={{paddingVertical: 7}}>
-          <Text
-            style={[styles.subHeader,{fontWeight: "700"}]}
-          >
-            {'Forgot your password?'}
-          </Text>
-        </View>
-        <View style={{paddingTop: 5}}>
-          <GlobalButton
-            innerText={"Log in"}
-            innerTextColor={'#28230E'}
-            backGroundColor={'#FFDEA8'}
-            onPressButton={loginHandler}
-          />
-        </View>
-        
+        <Formik
+          validationSchema={loginValidationSchema}
+          initialValues={{ email: '', password: '' }}
+          onSubmit={values => console.log(values)}
+        >
+          {({ handleChange,
+              handleBlur,
+              handleSubmit,
+              values,
+              errors,
+              touched,
+              // isValid,
+          }) => (
+            <>
+              <View style={styles.field}>
+                  <TextInput
+                    placeholder="Email"
+                    style={styles.inputText}
+                    onChangeText={handleChange('email')}
+                    onBlur={handleBlur('email')}
+                    value={values.email}
+                    keyboardType="email-address"
+                  />
+              </View>
+              {(errors.email && touched.email) &&
+                <Text style={styles.errorText}>{errors.email}</Text>
+              }
+              <View style={styles.field}>
+                  <TextInput
+                    placeholder="Password"
+                    style={styles.inputText}
+                    onChangeText={handleChange('password')}
+                    onBlur={handleBlur('password')}
+                    value={values.password}
+                    secureTextEntry
+                  />
+              </View>
+              {(errors.password && touched.password) &&
+                <Text style={styles.errorText}>{errors.password}</Text>
+              }
+              <View style={{paddingVertical: 7}}>
+                <Text
+                  style={[styles.subHeader,{fontWeight: "700"}]}
+                >
+                  {'Forgot your password?'}
+                </Text>
+              </View>
+              <View style={{paddingTop: 5}}>
+                <GlobalButton
+                  innerText={"Log in"}
+                  innerTextColor={'#28230E'}
+                  backGroundColor={'#FFDEA8'}
+                  onPressButton={handleSubmit}
+                />
+              </View>
+            </>
+          )}
+        </Formik>
       </View>
     </View>
-  );
+  )
 };
-
 
 export default Login;
