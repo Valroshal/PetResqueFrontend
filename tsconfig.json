@@ -18,6 +18,7 @@
     "src/**/*.tsx",
     "src/components",
     "src/custom.d.ts",
+    "types/fixes.d.ts",
   ],
   "exclude": [
     "node_modules",
