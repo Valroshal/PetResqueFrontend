@@ -1,8 +1,7 @@
 import * as React from 'react';
 import Ex from "../../assets/images/Ex.png";
 import {Image, StyleSheet, Text, TextInput, TextStyle, View, ViewStyle} from "react-native";
-import {useFormik} from "formik";
-import * as yup from "yup";
+import {useFormikContext, validateYupSchema} from "formik";
 import {useEffect} from "react";
 
 const styles = StyleSheet.create({
@@ -57,43 +56,27 @@ const styles = StyleSheet.create({
 	} as TextStyle,
 })
 
+
 const EmailField = () => {
-	const {setFieldValue, values, errors, touched } = useFormik<{
-		email: string;
-	}>({
-		initialValues: {
-			email: '',
-		},
-		onSubmit: (): void => {},
-		validationSchema: yup.object().shape({
-			email: yup
-			.string()
-			.email("Please enter valid email address - yourname@domain.com")
-			.required('Please enter your email'),
-		}),
-	});
+	const {handleBlur,handleChange, values, errors, touched } = useFormikContext<any>();
 	
-	useEffect(() =>
-		{
-		console.log("email comp." + values.email)}
-	);
-	
-	// const handleChange =  (val: string)=> {
-	// 	setFieldValue('email', val);
-	// 	console.log("email- print: " + val);
-	//
-	// };
-	
+	useEffect(() => {
+		console.log( "email comp.",values )
+		console.log( "error:", errors.email )
+	},[values,errors.email]);
+
 	return (
-		<View >
-			<View
+			<View >
+	 		<View
 				style={(errors.email && touched.email) ? styles.fieldError : styles.field}
 			>
 				<TextInput
 					placeholder="Email"
 					style={(errors.email && touched.email) ? [styles.inputTextError,{color: '#EC6868'}] : styles.inputText}
+					// onChangeText={(values) => setFieldValue('email',values)}
+					onChangeText={handleChange('email')}
 					value={values.email}
-					onChangeText={(val) => setFieldValue('email', val)}
+					// onBlur={handleBlur(validateYupSchema(values.email))}
 					keyboardType="email-address"
 				/>
 				{(errors.email && touched.email) && (
@@ -105,16 +88,15 @@ const EmailField = () => {
 					</View>
 				)
 				}
-				
+
 			</View>
-			{(errors.email && touched.email) && (
-          <View style={{paddingBottom: 20}}>
+				{errors.email && touched.email &&
+					<View style={{paddingBottom: 20}}>
 						<Text style={styles.errorText}>
-							{errors.email}
+							{/*{errors.email}*/}
 						</Text>
 					</View>
-			)
-			}
+				}
 		</View>
 	)
 };

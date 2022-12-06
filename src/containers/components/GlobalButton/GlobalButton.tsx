@@ -18,7 +18,7 @@ interface Props{
     innerTextColor: string
     backGroundColor: string
     borderColor?: string
-    onPressButton: () => void
+    onPressButton: any
 }
 
 

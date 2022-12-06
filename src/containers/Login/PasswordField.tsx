@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Ex from "../../assets/images/Ex.png";
 import {Image, StyleSheet, Text, TextInput, TextStyle, View, ViewStyle} from "react-native";
-import {useFormik} from "formik";
-import * as yup from "yup";
+import {useFormikContext} from "formik";
+import {useEffect} from "react";
 
 const styles = StyleSheet.create({
 	container: {
@@ -56,21 +56,14 @@ const styles = StyleSheet.create({
 	} as TextStyle,
 })
 
+
 const PasswordField = () => {
-	const { handleChange, values, errors, touched } = useFormik<{
-		password: string;
-	}>({
-		initialValues: {
-			password: '',
-		},
-		onSubmit: (): void => {},
-		validationSchema: yup.object().shape({
-			password: yup
-			.string()
-			.min(8, ({ min }) => `Use at least ${min} characters. Include both an uppercase \n` + `letter and a number`)
-			.required('Password is required'),
-		}),
-	});
+	const { setFieldValue, values, errors, touched } = useFormikContext<any>();
+	
+	useEffect(() => {
+		console.log( "password comp.",values.password )
+		console.log( "error password comp.:", (errors.password) )
+	},[values.password,errors.password]);
 
 	return (
 		<View>
@@ -80,7 +73,7 @@ const PasswordField = () => {
 				<TextInput
 					placeholder="Password"
 					style={(errors.password && touched.password) ? [styles.inputTextError] : styles.inputText}
-					onChangeText={handleChange('password')}
+					onChangeText={(values) => setFieldValue('password',values)}
 					value={values.password}
 					secureTextEntry
 				/>
@@ -97,7 +90,7 @@ const PasswordField = () => {
 			{(errors.password && touched.password) && (
 				<View style={{paddingBottom: 20}}>
           <Text style={styles.errorText}>
-						{errors.password}
+						errors.password
 					</Text>
 				</View>
 			)
