@@ -5,7 +5,6 @@ import TopLogo from "../components/TopLogo/TopLogo";
 import GlobalButton from "../components/GlobalButton/GlobalButton";
 import EmailField from "./EmailField";
 import PasswordField from "./PasswordField";
-import {useEffect} from "react";
 import * as Yup from 'yup';
 
 const styles = StyleSheet.create({
@@ -83,21 +82,24 @@ const styles = StyleSheet.create({
 
 
 const SignupSchema = Yup.object().shape({
-  password: Yup.string()
-  .min(8, 'Use at least 8 characters. Include both an uppercase\n' +
-    'letter and a number')
-  .max(20, 'Too Long!')
-  .required('Please enter password'),
-  email: Yup.string().email('Please enter valid email address').required('Please enter valid email address - yourname@domain.com'),
+  password: Yup
+    .string()
+    .min(8, 'Use at least 8 characters. Include both an uppercase\n' +
+      'letter and a number')
+    .max(20, 'Too Long!')
+    .required('Please enter password')
+    .matches(
+      /^(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/,
+      'Use at least 8 characters. Include both an uppercase\n' +
+      'letter and a number' ),
+  email: Yup
+    .string()
+    .email('Please enter valid email address - yourname@domain.com')
+    .required('Please enter valid email address'),
 });
 
 const Login = () => {
-  // useEffect(() =>
-  //   {
-  //     console.log("email")}
-  // );
-  
-
+ 
   const onPress =() => {
     console.log("pressed forgot password")
   }

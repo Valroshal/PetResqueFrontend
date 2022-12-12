@@ -51,14 +51,14 @@ const styles = StyleSheet.create({
 		fontFamily:'Lato' ,
 	} as TextStyle,
 	errorText: {
-		fontSize: 10,
+		fontSize: 12,
 		color: '#BA0000',
 	} as TextStyle,
 })
 
 
 const PasswordField = () => {
-	const { setFieldValue, values, errors, touched } = useFormikContext<any>();
+	const { handleBlur,handleChange, values, errors, touched } = useFormikContext<any>();
 	
 	useEffect(() => {
 		console.log( "password comp.",values.password )
@@ -73,7 +73,8 @@ const PasswordField = () => {
 				<TextInput
 					placeholder="Password"
 					style={(errors.password && touched.password) ? [styles.inputTextError] : styles.inputText}
-					onChangeText={(values) => setFieldValue('password',values)}
+					onChangeText={handleChange('password')}
+					onBlur={handleBlur('password')}
 					value={values.password}
 					secureTextEntry
 				/>
@@ -88,9 +89,9 @@ const PasswordField = () => {
 				}
 			</View>
 			{(errors.password && touched.password) && (
-				<View style={{paddingBottom: 20}}>
+				<View style={{paddingTop: 4, paddingBottom: 20}}>
           <Text style={styles.errorText}>
-						errors.password
+						{errors.password.toString()}
 					</Text>
 				</View>
 			)
