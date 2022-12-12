@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Ex from "../../assets/images/Ex.png";
 import {Image, StyleSheet, Text, TextInput, TextStyle, View, ViewStyle} from "react-native";
-import {useFormikContext, validateYupSchema} from "formik";
+import {useFormikContext} from "formik";
 import {useEffect} from "react";
 
 const styles = StyleSheet.create({
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
 
 
 const EmailField = () => {
-	const {handleBlur,handleChange, values, errors, touched } = useFormikContext<any>();
+	const {handleChange, values, errors, touched } = useFormikContext<any>();
 	
 	useEffect(() => {
 		console.log( "email comp.",values )
@@ -67,13 +67,12 @@ const EmailField = () => {
 
 	return (
 			<View >
-	 		<View
-				style={(errors.email && touched.email) ? styles.fieldError : styles.field}
-			>
+				<View
+					style={(errors.email && touched.email) ? styles.fieldError : styles.field}
+				>
 				<TextInput
 					placeholder="Email"
 					style={(errors.email && touched.email) ? [styles.inputTextError,{color: '#EC6868'}] : styles.inputText}
-					// onChangeText={(values) => setFieldValue('email',values)}
 					onChangeText={handleChange('email')}
 					value={values.email}
 					// onBlur={handleBlur(validateYupSchema(values.email))}
