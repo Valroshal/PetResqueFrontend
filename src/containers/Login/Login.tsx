@@ -6,6 +6,12 @@ import GlobalButton from "../components/GlobalButton/GlobalButton";
 import EmailField from "./EmailField";
 import PasswordField from "./PasswordField";
 import * as Yup from 'yup';
+import {UseGetUser} from "../../queries/loginQuery";
+import {useState} from "react";
+
+interface Props{
+  navigation: any
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -98,12 +104,28 @@ const SignupSchema = Yup.object().shape({
     .required('Please enter valid email address'),
 });
 
-const Login = () => {
- 
+const Login: React.FC<Props> = ({navigation}) => {
+  //const [userDetails , setUserDetails] = useState();
   const onPress =() => {
     console.log("pressed forgot password")
   }
-  
+
+  const onSubmitSend =(values: any) => {
+    const userDetails = {
+      email : values.email,
+      password : values.password,
+    }
+    console.log("onSubmitSend called", userDetails);
+    // send the user details to the server and get the response (all the info about this user)
+    const {data , isLoading} = UseGetUser(userDetails);
+    // if the response is successful navigate to next screen and cache the user info.
+    if (data.data != undefined):
+      navigation.navigate('AddPetFirst')
+
+    // if the response is not successful Error will be returned.
+  }
+
+
   return (
     <View style={styles.container}>
       <TopLogo />
@@ -120,7 +142,7 @@ const Login = () => {
           initialValues={{ email: '', password: '' }}
           validationSchema={SignupSchema}
           onSubmit={(values) => {
-            console.log('submit: ' ,values);
+            onSubmitSend(values)
           }}
         >
           {({handleSubmit}) => (
@@ -147,6 +169,12 @@ const Login = () => {
           )}
         </Formik>
       </View>
+      {/*{isLoading? (*/}
+      {/*    <Text>*/}
+      {/*      Loading...*/}
+      {/*    </Text>*/}
+      {/*) : data ? (*/}
+      {/*    data.data.map())}*/}
     </View>
   )
 };
