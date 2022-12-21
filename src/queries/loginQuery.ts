@@ -1,19 +1,35 @@
 import { useQuery} from "@tanstack/react-query";
 import axios from 'axios';
+import {TypeLogin} from "../../types/login";
 
 
-const userUrl = 'https://login/user';
-const getUser = async (userDetails: any) => {
-    const response = await axios.get(userUrl, {
-        params: {
-            email: userDetails.email,
-            password: userDetails.password
+const userUrl = 'https://catfact.ninja/breeds?limit=1';
+const getUser = async (userDetails: TypeLogin | undefined): Promise<boolean> => {
+    try{
+        console.log("Inside getUser:",userDetails)
+        if (userDetails) {
+            const response = await axios.get(userUrl, {
+                params: {
+                    email: userDetails.email,
+                    password: userDetails.password
+                }
+            })
+            console.log("getUser here:",response)
+            return true;
         }
-    })
-    return response.data;
+        return false;
+    }
+    catch(err) {
+        throw err;
+    }
+
+
 };
 
-export const UseGetUser = (userDetails: any) => {
-    const {isLoading, data} = useQuery(['userLogin'], getUser);
-    return {data, isLoading};
+export const UseGetUserInfo = (
+    userDetails: TypeLogin | undefined
+) => {
+    return useQuery(['userLogin'], () => getUser(userDetails));
+    //console.log("UseGetUserInfo here:" , data)
+
 };

@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle} from 'react-native';
 import {Formik} from 'formik';
-import TopLogo from "../components/TopLogo/TopLogo";
-import GlobalButton from "../components/GlobalButton/GlobalButton";
+import TopLogo from "../../components/TopLogo/TopLogo";
+import GlobalButton from "../../components/GlobalButton/GlobalButton";
 import EmailField from "./EmailField";
 import PasswordField from "./PasswordField";
 import * as Yup from 'yup';
-import {UseGetUser} from "../../queries/loginQuery";
+import { UseGetUserInfo } from "../../queries/loginQuery";
 import {useState} from "react";
+import {TypeLogin} from "../../../types/login";
 
 interface Props{
   navigation: any
@@ -105,24 +106,29 @@ const SignupSchema = Yup.object().shape({
 });
 
 const Login: React.FC<Props> = ({navigation}) => {
-  //const [userDetails , setUserDetails] = useState();
+
+  const [userDetails , setUserDetails] = useState<TypeLogin>();
+  const { data , refetch: refetchGetUserInfo } = UseGetUserInfo(userDetails);
+
   const onPress =() => {
     console.log("pressed forgot password")
   }
 
-  const onSubmitSend =(values: any) => {
-    const userDetails = {
+  const onSubmitSend = (values: any) => {
+    const userD = {
       email : values.email,
       password : values.password,
     }
-    console.log("onSubmitSend called", userDetails);
-    // send the user details to the server and get the response (all the info about this user)
-    const {data , isLoading} = UseGetUser(userDetails);
-    // if the response is successful navigate to next screen and cache the user info.
-    if (data.data != undefined):
-      navigation.navigate('AddPetFirst')
+    setUserDetails(userD);
+    console.log("userD: ",userD);
+    //console.log("before refetch user details" , data );
+    console.log("onSubmitSend called", userDetails );
+    if (userDetails) {
+      console.log("userDetails  updated", userDetails);
+      refetchGetUserInfo().then();
 
-    // if the response is not successful Error will be returned.
+    }
+    //console.log("data:", data);
   }
 
 
