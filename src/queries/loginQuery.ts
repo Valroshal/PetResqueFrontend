@@ -29,7 +29,8 @@ const getUser = async (userDetails: TypeLogin | undefined): Promise<boolean> => 
 export const UseGetUserInfo = (
     userDetails: TypeLogin | undefined
 ) => {
-    return useQuery(['userLogin'], () => getUser(userDetails));
     //console.log("UseGetUserInfo here:" , data)
+
+    return useQuery(['userLogin'], () => getUser(userDetails));
 
 };

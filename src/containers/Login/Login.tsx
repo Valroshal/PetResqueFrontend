@@ -7,7 +7,7 @@ import EmailField from "./EmailField";
 import PasswordField from "./PasswordField";
 import * as Yup from 'yup';
 import { UseGetUserInfo } from "../../queries/loginQuery";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {TypeLogin} from "../../../types/login";
 
 interface Props{
@@ -107,24 +107,28 @@ const SignupSchema = Yup.object().shape({
 
 const Login: React.FC<Props> = ({navigation}) => {
 
-  const [userDetails , setUserDetails] = useState<TypeLogin>();
-  const { data , refetch: refetchGetUserInfo } = UseGetUserInfo(userDetails);
+  //const [userDetails , setUserDetails] = useState<TypeLogin>();
+  const { data , refetch: refetchGetUserInfo } = UseGetUserInfo(userD);
 
   const onPress =() => {
     console.log("pressed forgot password")
   }
 
+
+
   const onSubmitSend = (values: any) => {
     const userD = {
-      email : values.email,
-      password : values.password,
+      email: values.email,
+      password: values.password,
     }
-    setUserDetails(userD);
-    console.log("userD: ",userD);
+
+    //setUserDetails(userD)
+
+    //console.log("userD: ", userD);
     //console.log("before refetch user details" , data );
-    console.log("onSubmitSend called", userDetails );
-    if (userDetails) {
-      console.log("userDetails  updated", userDetails);
+    console.log("onSubmitSend called", values);
+    if (values) {
+      console.log("userDetails  updated", values);
       refetchGetUserInfo().then();
 
     }
@@ -148,12 +152,13 @@ const Login: React.FC<Props> = ({navigation}) => {
           initialValues={{ email: '', password: '' }}
           validationSchema={SignupSchema}
           onSubmit={(values) => {
+
             onSubmitSend(values)
           }}
         >
-          {({handleSubmit}) => (
+          {({handleSubmit, errors, touched}) => (
             <>
-              <EmailField />
+              <EmailField stateChanger={set}/>
               <PasswordField />
               <View style={{paddingVertical: 7}}>
                 <TouchableOpacity
@@ -168,19 +173,16 @@ const Login: React.FC<Props> = ({navigation}) => {
                   innerText={"Log in"}
                   innerTextColor={'#28230E'}
                   backGroundColor={'#FFDEA8'}
+                  borderColor={'#28230E'}
                   onPressButton={handleSubmit}
+                  isEnabled = {!(!errors.password && !errors.email
+                      && touched.email && touched.password)}
                 />
               </View>
             </>
           )}
         </Formik>
       </View>
-      {/*{isLoading? (*/}
-      {/*    <Text>*/}
-      {/*      Loading...*/}
-      {/*    </Text>*/}
-      {/*) : data ? (*/}
-      {/*    data.data.map())}*/}
     </View>
   )
 };

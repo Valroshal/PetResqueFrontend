@@ -19,6 +19,7 @@ interface Props{
     backGroundColor: string
     borderColor?: string
     onPressButton: any
+    isEnabled: boolean
 }
 
 
@@ -27,11 +28,13 @@ const GlobalButton: React.FC<Props>  = ({
                                             innerTextColor,
                                             backGroundColor,
                                             borderColor ,
-                                            onPressButton
+                                            onPressButton,
+                                            isEnabled
 }) => {
 
     return (
         <TouchableOpacity
+            disabled={isEnabled}
             style={[ styles.defaultContainer ,{backgroundColor: backGroundColor},
                 !borderColor ? null : {borderColor: borderColor, borderWidth: 1} ]}
             onPress={onPressButton}
