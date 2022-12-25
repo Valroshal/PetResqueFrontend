@@ -5,14 +5,11 @@ import TopLogo from "../../components/TopLogo/TopLogo";
 import GlobalButton from "../../components/GlobalButton/GlobalButton";
 import EmailField from "./EmailField";
 import PasswordField from "./PasswordField";
-import * as Yup from 'yup';
 import { UseGetUserInfo } from "../../queries/loginQuery";
-import {useEffect, useState} from "react";
+import {useCallback, useState} from "react";
 import {TypeLogin} from "../../../types/login";
-
-interface Props{
-  navigation: any
-}
+import {LoginSchema} from "./utils";
+import {useNavigation} from "@react-navigation/native";
 
 const styles = StyleSheet.create({
   container: {
@@ -87,54 +84,26 @@ const styles = StyleSheet.create({
   } as TextStyle,
 });
 
+const Login = () => {
 
-const SignupSchema = Yup.object().shape({
-  password: Yup
-    .string()
-    .min(8, 'Use at least 8 characters. Include both an uppercase\n' +
-      'letter and a number')
-    .max(20, 'Too Long!')
-    .required('Please enter password')
-    .matches(
-      /^(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/,
-      'Use at least 8 characters. Include both an uppercase\n' +
-      'letter and a number' ),
-  email: Yup
-    .string()
-    .email('Please enter valid email address - yourname@domain.com')
-    .required('Please enter valid email address'),
-});
+  const { navigate } = useNavigation(); // Todo instead of prop navigation
 
-const Login: React.FC<Props> = ({navigation}) => {
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
 
-  //const [userDetails , setUserDetails] = useState<TypeLogin>();
-  const { data , refetch: refetchGetUserInfo } = UseGetUserInfo(userD);
+  const { refetch: refetchGetUserInfo } = UseGetUserInfo({email, password});
 
   const onPress =() => {
     console.log("pressed forgot password")
   }
 
-
-
-  const onSubmitSend = (values: any) => {
-    const userD = {
-      email: values.email,
-      password: values.password,
-    }
-
-    //setUserDetails(userD)
-
-    //console.log("userD: ", userD);
-    //console.log("before refetch user details" , data );
+  const onSubmitSend = useCallback((values: TypeLogin) => {
     console.log("onSubmitSend called", values);
     if (values) {
       console.log("userDetails  updated", values);
       refetchGetUserInfo().then();
-
     }
-    //console.log("data:", data);
-  }
-
+  }, [refetchGetUserInfo])
 
   return (
     <View style={styles.container}>
@@ -150,16 +119,19 @@ const Login: React.FC<Props> = ({navigation}) => {
         </Text>
         <Formik
           initialValues={{ email: '', password: '' }}
-          validationSchema={SignupSchema}
+          validationSchema={LoginSchema}
           onSubmit={(values) => {
-
             onSubmitSend(values)
           }}
         >
           {({handleSubmit, errors, touched}) => (
             <>
-              <EmailField stateChanger={set}/>
-              <PasswordField />
+              <EmailField
+                  onChangeEmail={(val: string) => setEmail(val)}
+              />
+              <PasswordField
+                  onChangePassword={(val: string) => setPassword(val)}
+              />
               <View style={{paddingVertical: 7}}>
                 <TouchableOpacity
                   style={styles.subHeader}

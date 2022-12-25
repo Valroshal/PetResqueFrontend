@@ -4,8 +4,8 @@ import {TypeLogin} from "../../types/login";
 
 
 const userUrl = 'https://catfact.ninja/breeds?limit=1';
-const getUser = async (userDetails: TypeLogin | undefined): Promise<boolean> => {
-    try{
+const getUserInfo = async (userDetails: TypeLogin | undefined): Promise<boolean> => {
+    try {
         console.log("Inside getUser:",userDetails)
         if (userDetails) {
             const response = await axios.get(userUrl, {
@@ -22,15 +22,10 @@ const getUser = async (userDetails: TypeLogin | undefined): Promise<boolean> => 
     catch(err) {
         throw err;
     }
-
-
 };
 
 export const UseGetUserInfo = (
     userDetails: TypeLogin | undefined
 ) => {
-    //console.log("UseGetUserInfo here:" , data)
-
-    return useQuery(['userLogin'], () => getUser(userDetails));
-
+    return useQuery(['userLogin'], () => getUserInfo(userDetails));
 };
