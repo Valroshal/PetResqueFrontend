@@ -19,7 +19,7 @@ interface Props{
     backGroundColor: string
     borderColor?: string
     onPressButton: any
-    isEnabled: boolean
+    isEnabled?: boolean
 }
 
 
@@ -27,7 +27,7 @@ const GlobalButton: React.FC<Props>  = ({
                                             innerText,
                                             innerTextColor,
                                             backGroundColor,
-                                            borderColor ,
+                                            borderColor,
                                             onPressButton,
                                             isEnabled
 }) => {

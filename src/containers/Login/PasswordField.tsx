@@ -64,14 +64,8 @@ const PasswordField: React.FC<Props> = ({onChangePassword}) => {
 	const { handleBlur, handleChange, values, errors, touched } = useFormikContext<any>();
 	
 	useEffect(() => {
-		console.log( "password comp.",values.password )
-		console.log( "error password comp.:", (errors.password) )
-	},[values.password,errors.password]);
-
-	const handleChangeText = useCallback((password: string) => {
-		handleChange('password')
-		onChangePassword(password)
-	}, [])
+		onChangePassword(values.password)
+	},[values.password]);
 
 	return (
 		<View>
@@ -81,7 +75,7 @@ const PasswordField: React.FC<Props> = ({onChangePassword}) => {
 				<TextInput
 					placeholder="Password"
 					style={(errors.password && touched.password) ? [styles.inputTextError] : styles.inputText}
-					onChangeText={(e:any) => handleChangeText(e.target.value)}
+					onChangeText={handleChange('password')}
 					onBlur={handleBlur('password')}
 					value={values.password}
 					secureTextEntry

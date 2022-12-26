@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
 
 const Login = () => {
 
-  const { navigate } = useNavigation(); // Todo instead of prop navigation
+  const  navigate  = useNavigation();
 
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
@@ -94,13 +94,11 @@ const Login = () => {
   const { refetch: refetchGetUserInfo } = UseGetUserInfo({email, password});
 
   const onPress =() => {
-    console.log("pressed forgot password")
+    navigate.goBack();
   }
 
   const onSubmitSend = useCallback((values: TypeLogin) => {
-    console.log("onSubmitSend called", values);
     if (values) {
-      console.log("userDetails  updated", values);
       refetchGetUserInfo().then();
     }
   }, [refetchGetUserInfo])
@@ -112,7 +110,9 @@ const Login = () => {
         <Text style={[styles.header , {paddingBottom: 15}]}>
             {'Log in'}
         </Text>
-        <Text style={[styles.subHeader, {display: "flex", flexWrap: "wrap",paddingBottom: 14}]}>
+        <Text
+            style={[styles.subHeader, {display: "flex", flexWrap: "wrap", paddingBottom: 14}]}
+        >
             {'Log in to search for your pet or connect to \n' +
             'other pet lovers and help them to find and\n' +                                                                                       
             'return pets to their home'}
@@ -147,8 +147,7 @@ const Login = () => {
                   backGroundColor={'#FFDEA8'}
                   borderColor={'#28230E'}
                   onPressButton={handleSubmit}
-                  isEnabled = {!(!errors.password && !errors.email
-                      && touched.email && touched.password)}
+                  isEnabled = {!(!errors.password && !errors.email && touched.email && touched.password )}
                 />
               </View>
             </>
