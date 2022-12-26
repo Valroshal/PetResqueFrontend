@@ -8,7 +8,10 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         height: 48,
-        borderRadius: 8
+        width:320,
+        borderRadius: 8,
+        marginTop:18,
+        marginLeft:21
     } as ViewStyle
 });
 
