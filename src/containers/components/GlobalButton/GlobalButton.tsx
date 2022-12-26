@@ -1,5 +1,7 @@
 import * as React from 'react';
-import {StyleSheet, ViewStyle, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, ViewStyle, Text, TouchableOpacity, Image, View} from 'react-native';
+import facebookIcon from '../../../assets/images/facebookIcon.png'
+import googleIcon from '../../../assets/images/googleIcon.png'
 
 const styles = StyleSheet.create({
     defaultContainer: {
@@ -39,9 +41,13 @@ const GlobalButton: React.FC<Props>  = ({
                 !borderColor ? null : {borderColor: borderColor, borderWidth: 1} ]}
             onPress={onPressButton}
         >
+            <View style={{paddingRight: 12}}>
+                <Image style= {{width: 12, height: 24}} source={facebookIcon} />
+            </View>
             <Text style={{color: innerTextColor, fontFamily: 'Lato', fontSize: 16}}>
                 {innerText}
             </Text>
+            
         </TouchableOpacity>
 
     );
