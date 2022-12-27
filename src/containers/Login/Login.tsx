@@ -1,44 +1,40 @@
 import * as React from 'react';
-import {
-  StyleSheet,
-  Text,
-  TextStyle,
-  TouchableOpacity,
-  View,
-  ViewStyle,
-} from 'react-native';
+import { StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle} from 'react-native';
 import {Formik} from 'formik';
-import TopLogo from '../components/TopLogo/TopLogo';
-import GlobalButton from '../components/GlobalButton/GlobalButton';
-import EmailField from './EmailField';
-import PasswordField from './PasswordField';
-//import {useEffect} from 'react';
-import * as Yup from 'yup';
+import TopLogo from "../../components/TopLogo/TopLogo";
+import GlobalButton from "../../components/GlobalButton/GlobalButton";
+import EmailField from "./EmailField";
+import PasswordField from "./PasswordField";
+import { UseGetUserInfo } from "../../queries/loginQuery";
+import {useCallback, useState} from "react";
+import {TypeLogin} from "../../../types/login";
+import {LoginSchema} from "./utils";
+import {useNavigation} from "@react-navigation/native";
 
 const styles = StyleSheet.create({
   container: {
-    display: 'flex',
-    height: '100%',
+    display: "flex",
+    height: "100%",
     backgroundColor: '#FFFFFF',
     paddingTop: 46,
   } as ViewStyle,
   innerContainer: {
-    display: 'flex',
-    padding: 20,
+    display: "flex",
+    padding : 20,
     paddingTop: 91,
   } as ViewStyle,
   header: {
     fontSize: 32,
     fontFamily: 'Lato',
-    color: '#28230E',
-    alignItems: 'center',
-  } as TextStyle,
+    color: "#28230E",
+    alignItems: "center",
+  }  as TextStyle,
   subHeader: {
     fontSize: 16,
-    fontStyle: 'normal',
-    color: '#28230E',
+    fontStyle: "normal",
+    color: "#28230E",
     fontFamily: 'Lato',
-    fontWeight: '400',
+    fontWeight: "400",
   } as TextStyle,
   field: {
     borderRadius: 8,
@@ -46,7 +42,7 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(141, 141, 141, 0.15)',
     marginBottom: 20,
     shadowColor: '#000',
-    backgroundColor: 'white',
+    backgroundColor: "white" ,
     shadowOffset: {width: 6, height: 6},
     shadowRadius: 10,
     shadowOpacity: 0.15,
@@ -54,12 +50,12 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   fieldError: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     borderRadius: 8,
     borderWidth: 1,
     borderColor: '#EC6868',
     shadowColor: '#000',
-    backgroundColor: '#FFE8E8',
+    backgroundColor: "#FFE8E8" ,
     shadowOffset: {width: 6, height: 6},
     shadowRadius: 10,
     shadowOpacity: 0.15,
@@ -67,20 +63,20 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   inputText: {
     padding: 10,
-    paddingVertical: 13.5,
-    alignItems: 'flex-start',
+    paddingVertical:13.5,
+    alignItems: "flex-start",
     fontSize: 16,
-    fontFamily: 'Lato',
+    fontFamily:'Lato' ,
     color: '#6C6C6C',
   } as TextStyle,
   inputTextError: {
     padding: 10,
     paddingTop: 13.5,
     paddingBottom: 13.5,
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
     fontSize: 16,
     color: '#EC6868',
-    fontFamily: 'Lato',
+    fontFamily:'Lato' ,
   } as TextStyle,
   errorText: {
     fontSize: 12,
@@ -88,65 +84,70 @@ const styles = StyleSheet.create({
   } as TextStyle,
 });
 
-const SignupSchema = Yup.object().shape({
-  password: Yup.string()
-    .min(
-      8,
-      'Use at least 8 characters. Include both an uppercase\n' +
-        'letter and a number',
-    )
-    .max(20, 'Too Long!')
-    .required('Please enter password'),
-  email: Yup.string()
-    .email('Please enter valid email address')
-    .required('Please enter valid email address - yourname@domain.com'),
-});
-
 const Login = () => {
-  // useEffect(() =>
-  //   {
-  //     console.log("email")}
-  // );
 
-  const onPress = () => {
-    console.log('pressed forgot password');
-  };
+  const  navigate  = useNavigation();
+
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+
+  const { refetch: refetchGetUserInfo } = UseGetUserInfo({email, password});
+
+  const onPress =() => {
+    navigate.goBack();
+  }
+
+  const onSubmitSend = useCallback((values: TypeLogin) => {
+    if (values) {
+      refetchGetUserInfo().then();
+    }
+  }, [refetchGetUserInfo])
 
   return (
     <View style={styles.container}>
       <TopLogo />
       <View style={styles.innerContainer}>
-        <Text style={[styles.header, {paddingBottom: 15}]}>{'Log in'}</Text>
+        <Text style={[styles.header , {paddingBottom: 15}]}>
+            {'Log in'}
+        </Text>
         <Text
-          style={[
-            styles.subHeader,
-            {display: 'flex', flexWrap: 'wrap', paddingBottom: 14},
-          ]}>
-          {'Log in to search for your pet or connect to \n' +
-            'other pet lovers and help them to find and\n' +
+            style={[styles.subHeader, {display: "flex", flexWrap: "wrap", paddingBottom: 14}]}
+        >
+            {'Log in to search for your pet or connect to \n' +
+            'other pet lovers and help them to find and\n' +                                                                                       
             'return pets to their home'}
         </Text>
         <Formik
-          initialValues={{email: '', password: ''}}
-          validationSchema={SignupSchema}
-          onSubmit={values => {
-            console.log('submit: ', values);
-          }}>
-          {({handleSubmit}) => (
+          initialValues={{ email: '', password: '' }}
+          validationSchema={LoginSchema}
+          onSubmit={(values) => {
+            onSubmitSend(values)
+          }}
+        >
+          {({handleSubmit, errors, touched}) => (
             <>
-              <EmailField />
-              <PasswordField />
+              <EmailField
+                  onChangeEmail={(val: string) => setEmail(val)}
+              />
+              <PasswordField
+                  onChangePassword={(val: string) => setPassword(val)}
+              />
               <View style={{paddingVertical: 7}}>
-                <TouchableOpacity style={styles.subHeader} onPress={onPress}>
+                <TouchableOpacity
+                  style={styles.subHeader}
+                  onPress={onPress}
+                >
                   <Text>Forgot your password?</Text>
                 </TouchableOpacity>
               </View>
               <View style={{paddingTop: 5}}>
                 <GlobalButton
-                  innerText={'Log in'}
+                  innerText={"Log in"}
                   innerTextColor={'#28230E'}
                   backGroundColor={'#FFDEA8'}
+                  borderColor={'#28230E'}
                   onPressButton={handleSubmit}
+                  isEnabled = {!(!errors.password && !errors.email && touched.email && touched.password )}
                 />
               </View>
             </>
@@ -154,7 +155,7 @@ const Login = () => {
         </Formik>
       </View>
     </View>
-  );
+  )
 };
 
 export default Login;

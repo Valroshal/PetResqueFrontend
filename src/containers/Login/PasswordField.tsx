@@ -2,7 +2,7 @@ import * as React from 'react';
 import Ex from "../../assets/images/Ex.png";
 import {Image, StyleSheet, Text, TextInput, TextStyle, View, ViewStyle} from "react-native";
 import {useFormikContext} from "formik";
-import {useEffect} from "react";
+import {useCallback, useEffect} from "react";
 
 const styles = StyleSheet.create({
 	container: {
@@ -51,19 +51,21 @@ const styles = StyleSheet.create({
 		fontFamily:'Lato' ,
 	} as TextStyle,
 	errorText: {
-		fontSize: 10,
+		fontSize: 12,
 		color: '#BA0000',
 	} as TextStyle,
 })
 
+interface Props{
+	onChangePassword: (value: string) => void
+}
 
-const PasswordField = () => {
-	const { setFieldValue, values, errors, touched } = useFormikContext<any>();
+const PasswordField: React.FC<Props> = ({onChangePassword}) => {
+	const { handleBlur, handleChange, values, errors, touched } = useFormikContext<any>();
 	
 	useEffect(() => {
-		console.log( "password comp.",values.password )
-		console.log( "error password comp.:", (errors.password) )
-	},[values.password,errors.password]);
+		onChangePassword(values.password)
+	},[values.password]);
 
 	return (
 		<View>
@@ -73,32 +75,30 @@ const PasswordField = () => {
 				<TextInput
 					placeholder="Password"
 					style={(errors.password && touched.password) ? [styles.inputTextError] : styles.inputText}
-					onChangeText={(values) => setFieldValue('password',values)}
+					onChangeText={handleChange('password')}
+					onBlur={handleBlur('password')}
 					value={values.password}
 					secureTextEntry
 				/>
-				{(errors.password && touched.password) && (
+				{(errors.password && touched.password) &&
 					<View>
 						<Image
 							source={Ex}
 							style={{width: 20, height:20,marginHorizontal: 18 , marginVertical : 14}}
 						/>
 					</View>
-				)
 				}
 			</View>
-			{(errors.password && touched.password) && (
-				<View style={{paddingBottom: 20}}>
-          <Text style={styles.errorText}>
-						errors.password
+			{(errors.password && touched.password) &&
+				<View style={{paddingTop: 4, paddingBottom: 20}}>
+					<Text style={styles.errorText}>
+						{errors.password.toString()}
 					</Text>
 				</View>
-			)
 			}
 		</View>
 	)
 };
-
 
 export default PasswordField;
 
