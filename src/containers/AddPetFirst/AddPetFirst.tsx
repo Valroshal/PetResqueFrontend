@@ -10,7 +10,7 @@ interface Props{
 const AddPetFirst: React.FC<Props> = ({navigation}) => {
     const lostPet = () => {
         console.log("Clicked lost Pet");
-        navigation.navigate('Login')
+        navigation.navigate('ThankScreen')
     }
     const foundPet = () => {
         console.log("Clicked FOUND Pet");

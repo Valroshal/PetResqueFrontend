@@ -1,4 +1,5 @@
 import React from 'react';
+import ThankScreen from "./src/containers/AddPetFirst/ThankScreen/ThankScreen";
 import Login from "./src/containers/Login/Login";
 import AddPetFirst from "./src/containers/AddPetFirst/AddPetFirst";
 import {NavigationContainer} from "@react-navigation/native";
