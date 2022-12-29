@@ -51,14 +51,15 @@ const OnBoardingPageWrapper = () => {
         <Swiper
             style={styles.wrapper}
             showsButtons={false}
-            autoplay
+            autoplay={true}
+            autoplayTimeout={2}
             showsPagination={true}
             dot={ <View style={styles.dot}/> }
             activeDot={ <View style={styles.activeDot}/> }
             paginationStyle={{
                 bottom: 217
             }}
-            // loop={false}
+            loop={false}
         >
             <View style={styles.slide1}>
                 <OnBoardingPage
