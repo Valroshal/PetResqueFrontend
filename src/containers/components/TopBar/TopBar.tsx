@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StyleSheet, Text, TextStyle, View, ViewStyle} from "react-native";
+import {Image, StyleSheet, Text, TextStyle, View, ViewStyle} from "react-native";
 import Burger from "../../../assets/images/Burger.png";
 
 const styles = StyleSheet.create({
@@ -7,15 +7,17 @@ const styles = StyleSheet.create({
         height: 60,
         width: '100%',
         backgroundColor: '#FFDEA8',
+        display: "flex",
+
     } as ViewStyle,
     title:{
-        alignItems: 'center',
-        justifyContent: 'center',
+        //alignItems: "flex-start",
+        justifyContent: "space-between",
         fontFamily: 'Concert One',
         color: '#FF6A3D',
         fontSize: 20,
         fontWeight: '400',
-        textAlign: 'center',
+        //textAlign: 'center',
     } as TextStyle,
 });
 
@@ -23,14 +25,18 @@ const styles = StyleSheet.create({
 const TopBar = () => {
     return (
         <View style={styles.container}>
-            <Text style={[styles.title, {paddingTop: 18}]}>
-                Rescue App
-            </Text>
-
+            <View style={{flexDirection: "row" ,paddingLeft: 130 , paddingTop:8, paddingBottom:8 , paddingRight: 15}}>
+                <Text style={[styles.title, {paddingTop: 10}]}>
+                    Rescue App
+                </Text>
+                <View style={{alignContent: "space-between"}}>
+                    <Image
+                        source={Burger}
+                    />
+                </View>
+            </View>
         </View>
-
     )
-
 }
 
 export default TopBar;
