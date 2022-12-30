@@ -14,7 +14,7 @@ const AddPetFirst: React.FC<Props> = ({navigation}) => {
     }
     const foundPet = () => {
         console.log("Clicked FOUND Pet");
-        navigation.navigate('TopBar')
+        navigation.navigate('HomePage')
     }
 
   return(

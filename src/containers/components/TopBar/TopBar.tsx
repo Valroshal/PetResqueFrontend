@@ -8,16 +8,21 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#FFDEA8',
         display: "flex",
-
+    } as ViewStyle,
+    innerContainer: {
+        flexDirection: "row" ,
+        justifyContent: "space-between",
+        paddingLeft: 130,
+        paddingTop: 8,
+        paddingBottom: 8,
+        paddingRight: 15,
     } as ViewStyle,
     title:{
-        //alignItems: "flex-start",
         justifyContent: "space-between",
         fontFamily: 'Concert One',
         color: '#FF6A3D',
         fontSize: 20,
         fontWeight: '400',
-        //textAlign: 'center',
     } as TextStyle,
 });
 
@@ -25,7 +30,7 @@ const styles = StyleSheet.create({
 const TopBar = () => {
     return (
         <View style={styles.container}>
-            <View style={{flexDirection: "row" ,paddingLeft: 130 , paddingTop:8, paddingBottom:8 , paddingRight: 15}}>
+            <View style={styles.innerContainer}>
                 <Text style={[styles.title, {paddingTop: 10}]}>
                     Rescue App
                 </Text>
