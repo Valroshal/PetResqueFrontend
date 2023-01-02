@@ -5,6 +5,7 @@ import AddPetFirst from "./src/containers/AddPetFirst/AddPetFirst";
 import {NavigationContainer} from "@react-navigation/native";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import HomePage from "./src/containers/HomeScreen/HomePage";
+import ActivityCard from "./src/containers/HomeScreen/ActivityCard/ActivityCard";
 
 const Stack = createNativeStackNavigator();
 
@@ -15,11 +16,8 @@ const App = () => {
             <Stack.Screen name="AddPetFirst" component={AddPetFirst} />
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="ThankScreen" component={ThankScreen} />
-            {/*<Stack.Screen name="HomePage" component={HomePage}   options={{ username: 'Bob' }}*/}
-            {/*/>*/}
-            <Stack.Screen name="HomePage">
-                {props => (<HomePage {...props} username={'Bob'}/>)}
-            </Stack.Screen>
+            <Stack.Screen name="ActivityCard" component={ActivityCard} />
+            <Stack.Screen name="HomePage" component={HomePage} />
         </Stack.Navigator>
       </NavigationContainer>
   );

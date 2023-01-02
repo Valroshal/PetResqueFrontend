@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {StyleSheet, Text, TextStyle, View} from "react-native";
 import TopBar from "../components/TopBar/TopBar";
+import { useState} from "react";
+import ActivityCard from "./ActivityCard/ActivityCard";
 
 const styles = StyleSheet.create({
     topText: {
@@ -18,49 +20,54 @@ const styles = StyleSheet.create({
 
 })
 
-interface Props{
-    username:  string
-}
+// interface Props{
+//     username:  string
+// }
 
-const HomePage: React.FC<Props> = (username) => {
+const HomePage = () => {
     //TODO: Add Props with name of the user.
-    const Greeting = (name: any) => {
-        return (
-            <View>
-                <Text style={styles.topText}>
-                    Good Evening, {name}!
-                </Text>
-            </View>
-            )
+    //TODO: Add the option to add more cards
 
-    }
+    const [userName, setUserName] = useState<string>('Bob');
 
     return(
         <View style={{flex: 1, backgroundColor: 'white'}}>
            <TopBar />
            <View style={{paddingHorizontal: 16}}>
                <View style={{paddingTop: 34}}>
-                   <Greeting name={username} />
+                   <Text style={styles.topText}>
+                       {"Good Evening, " + userName + "!"}
+                   </Text>
                </View>
                <View style={{paddingTop: 20}}>
                    <Text style={styles.topText}>
                        My activity
                    </Text>
                </View>
-               <View style={{paddingTop: 26,paddingLeft:4}}>
-                   <Text style={styles.cardTitles}>
+               <View style={{paddingTop: 26}}>
+                   <Text style={[styles.cardTitles,{ paddingBottom: 9, paddingLeft:4}]}>
                        Added found pet
                    </Text>
                    <View>
-
+                        <ActivityCard
+                            animalName={'Cat'}
+                            actionName={'found'}
+                            date={'12/03/2022'}
+                            address={'Johnson Road 12'}
+                        />
                    </View>
                </View>
-               <View style={{paddingLeft:4, paddingTop: 29}}>
-                   <Text style={styles.cardTitles}>
+               <View style={{ paddingTop: 29}}>
+                   <Text style={[styles.cardTitles,{ paddingBottom: 9,paddingLeft:4}]}>
                        Added lost pet
                    </Text>
                    <View>
-
+                        <ActivityCard
+                            animalName={'Garfield'}
+                            actionName={'lost'}
+                            date={'12/10/2021'}
+                            address={'Johnson Road 12'}
+                        />
                    </View>
                </View>
            </View>
