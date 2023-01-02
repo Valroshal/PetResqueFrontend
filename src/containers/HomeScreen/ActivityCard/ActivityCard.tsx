@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
         height: 97,
         backgroundColor: '#FFF4E2',
         borderRadius: 8,
+        marginBottom: 10,
     } as ViewStyle,
     infoBox: {
         paddingTop: 24,
