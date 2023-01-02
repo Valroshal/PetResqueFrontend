@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
         fontWeight: '300',
         fontSize: 16,
     }
-
 })
 
 const DATA = [
@@ -47,7 +46,7 @@ const DATA = [
 
 const HomePage = () => {
 
-    const renderItem = ({ item }) => (
+    const renderItem = ({ item } : any ) => (
         <ActivityCard
             animalName={item.animalName}
             actionName={item.actionName}

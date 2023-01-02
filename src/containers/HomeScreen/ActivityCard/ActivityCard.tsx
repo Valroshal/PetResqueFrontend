@@ -1,11 +1,13 @@
 import * as React from 'react';
 import {Image, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle} from "react-native";
-import ThreeDots from '../../../assets/images/ThreeDots.png'
+import ThreeDots from '../../../assets/images/ThreeDots.png';
 
 const styles = StyleSheet.create({
     container: {
         display: "flex",
         flexDirection: "row",
+        alignItems: "flex-start",
+        justifyContent: "space-between",
         height: 97,
         backgroundColor: '#FFF4E2',
         borderRadius: 8,
@@ -19,7 +21,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Lato',
         fontSize: 16,
         fontWeight: '400',
-} as TextStyle,
+    } as TextStyle,
 });
 
 interface Props {
@@ -30,12 +32,22 @@ interface Props {
 }
 
 const ActivityCard: React.FC<Props> = ({animalName, actionName,date,address}) => {
+
+    const openDetails = () => {
+      console.log('openDetails')
+    }
+
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={{
-                position: "absolute",
-                top: 16,
-                right:8 }}
+            <TouchableOpacity
+                style={{
+                // position: "absolute",
+                // top: 16,
+                // right:8
+
+            }}
+                //TODO: do it
+                onPress={openDetails}
             >
                 <Image source={ThreeDots} />
             </TouchableOpacity>
