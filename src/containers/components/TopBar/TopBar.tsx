@@ -4,23 +4,18 @@ import Burger from '../../../assets/images/Burger.png';
 
 const styles = StyleSheet.create({
     container: {
-        display: "flex",
-        height: 60,
-        width: '100%',
-        backgroundColor: '#FFDEA8',
-    } as ViewStyle,
-    innerContainer: {
         flexDirection: "row" ,
+        backgroundColor: '#FFDEA8',
         justifyContent: "center",
-        //alignItems: "center",
-        paddingTop: 8,
-        paddingBottom: 8,
-        paddingRight: 15,
-        paddingLeft: 30,
+    } as ViewStyle,
+    image: {
+        position: 'absolute',
+        right: 15,
+        top: 10,
+        height: 44 ,
+        width: 44
     } as ViewStyle,
     title:{
-        //justifyContent: "space-between",
-        alignContent: "center",
         fontFamily: 'Concert One',
         color: '#FF6A3D',
         fontSize: 20,
@@ -32,13 +27,11 @@ const styles = StyleSheet.create({
 const TopBar = () => {
     return (
         <View style={styles.container}>
-            <View style={styles.innerContainer}>
-                    <Text style={[styles.title, { paddingTop: 10}]}>
-                        Rescue App
-                    </Text>
-                <View style={{paddingLeft: 71, height: 44 , width: 44}}>
-                    <Image source={Burger} />
-                </View>
+            <Text style={[styles.title, { paddingTop: 18, paddingBottom: 22 }]}>
+                Rescue App
+            </Text>
+            <View style={styles.image}>
+                <Image source={Burger} />
             </View>
         </View>
     )

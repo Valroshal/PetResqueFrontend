@@ -6,15 +6,9 @@ const styles = StyleSheet.create({
     container: {
         display: "flex",
         flexDirection: "row",
-        alignItems: "flex-start",
         justifyContent: "space-between",
-        height: 97,
         backgroundColor: '#FFF4E2',
         borderRadius: 8,
-    } as ViewStyle,
-    infoBox: {
-        paddingTop: 24,
-        paddingLeft: 16,
     } as ViewStyle,
     regularText: {
         fontFamily: 'Lato',
@@ -32,36 +26,34 @@ interface Props {
 
 const ActivityCard: React.FC<Props> = ({animalName, actionName,date,address}) => {
 
-    const openDetails = () => {
+    const showMoreOptions = () => {
       console.log('openDetails')
     }
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity
-                style={{
-                // position: "absolute",
-                // top: 16,
-                // right:8
-
-            }}
-                //TODO: do it
-                onPress={openDetails}
-            >
-                <Image source={ThreeDots} />
-            </TouchableOpacity>
             <View>
-                <View style={styles.infoBox}>
+                <View style={{paddingTop: 24, paddingLeft: 16,}}>
                     <Text style={styles.regularText}>
                         {animalName + ', ' + actionName + ' on  ' + date}
                     </Text>
                 </View>
-                <View style={[styles.infoBox, {paddingTop: 17}]}>
+                <View style={ {paddingTop: 17,
+                    paddingLeft: 16,paddingBottom: 24}}>
                     <Text style={styles.regularText}>
                         {address}
                     </Text>
                 </View>
             </View>
+            <TouchableOpacity
+                style={{
+                    paddingTop: 10,
+                    paddingRight:19
+                }}
+                onPress={showMoreOptions}
+            >
+                <Image source={ThreeDots} />
+            </TouchableOpacity>
         </View>
     )
 }
