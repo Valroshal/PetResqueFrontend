@@ -7,14 +7,13 @@ import {
   View,
   ViewStyle,
   Button,
-  Alert
+  Alert,
 } from 'react-native';
 import {Formik} from 'formik';
 import TopLogo from '../components/TopLogo/TopLogo';
 import GlobalButton from '../components/GlobalButton/GlobalButton';
-//import {useEffect} from 'react';
 import * as Yup from 'yup';
-
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 const styles = StyleSheet.create({
   container: {
@@ -23,11 +22,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     paddingTop: 46,
   } as ViewStyle,
-  innerContainer: {
-    display: 'flex',
-    padding: 21,
-    paddingTop: 35,
-  } as ViewStyle,
+  innerContainer: {} as ViewStyle,
   header: {
     fontSize: 32,
     fontFamily: 'Lato',
@@ -43,59 +38,71 @@ const styles = StyleSheet.create({
   } as TextStyle,
 });
 
+interface Props {
+  navigation: any;
+}
 
-const SignUp = () => {
+const SignUp: React.FC<Props> = ({navigation}) => {
   return (
     <View style={styles.container}>
       <TopLogo />
-      
-        <Text style={[styles.header, {marginLeft:20,marginTop:35}]}>{'Sign up'}</Text>
-        <Text
-          style={[
-            styles.subHeader,
-            {display: 'flex', flexWrap: 'wrap', paddingBottom: 14,marginTop:16, marginLeft:20},
-          ]}>
-          {'Looks like you don\'t have an acount.\n Let\'s create a new one'}
-        </Text>
-      
-        <GlobalButton
-            innerText={'Continue'}
-            innerTextColor={'#28230E'}
-            backGroundColor={'#FFDEA8'}
-            onPressButton={() => Alert.alert('Simple Button pressed')}
-        />
- 
 
-        <GlobalButton
-            innerText={'Continue'}
-            innerTextColor={'#28230E'}
-            backGroundColor={'#FFDEA8'}
-            onPressButton={() => Alert.alert('Simple Button pressed')}
-        />
-        <Text style={[styles.subHeader,
-            {display: 'flex', flexWrap: 'wrap',marginTop:18, marginLeft:172},
-          ]}>
-          {'or'}
+      <View style={[styles.innerContainer, {padding: 21, paddingTop: 37}]}>
+        <Text style={styles.header}>{'Sign up'}</Text>
+        <Text style={[styles.subHeader, {paddingTop: 16}]}>
+          {"Looks like you don't have an acount.\nLet's create a new one"}
         </Text>
 
-       
-        <GlobalButton
-            innerText={'Sign Up with email'}
-            innerTextColor={'#28230E'}
-            backGroundColor={'#F5F5F5'}
-            onPressButton={() => Alert.alert('Simple Button pressed')}
-        />
-      
-       
-        <Text style={[styles.subHeader,
-            {display: 'flex', flexWrap: 'wrap', marginLeft:21, marginTop:33.5},
-          ]}>
-          {'Already have an acount?'}
-          <Text style={{fontWeight: "bold"}}> Log in here</Text>
-        </Text>
-       
+        <View style={[styles.innerContainer, {paddingTop: 19}]}>
+          <View style={[styles.innerContainer, {paddingTop: 0}]}>
+            <GlobalButton
+              innerText={'Continue'}
+              innerTextColor={'#28230E'}
+              backGroundColor={'#FFDEA8'}
+              onPressButton={() => Alert.alert('Simple Button pressed')}
+            />
+          </View>
+          <View style={[styles.innerContainer, {paddingTop: 18}]}>
+            <GlobalButton
+              innerText={'Continue'}
+              innerTextColor={'#28230E'}
+              backGroundColor={'#FFDEA8'}
+              onPressButton={() => Alert.alert('Simple Button pressed')}
+            />
+          </View>
+          <Text
+            style={[
+              styles.subHeader,
+              {width: 320, height: 34, textAlign: 'center', paddingTop: 18},
+            ]}>
+            {'or'}
+          </Text>
 
-        
+          <View
+            style={[
+              styles.innerContainer,
+              {paddingTop: 18, paddingBottom: 33},
+            ]}>
+            <GlobalButton
+              innerText={'Sign Up with email'}
+              innerTextColor={'#28230E'}
+              backGroundColor={'#F5F5F5'}
+              onPressButton={() => Alert.alert('Simple Button pressed')}
+            />
+          </View>
+        </View>
+
+        <Text style={[styles.subHeader, {}]}>
+          {'Already have an acount? '}
+          <Text
+            onPress={() => {
+              navigation.navigate('Login');
+            }}
+            style={[styles.subHeader, {fontWeight: 'bold'}]}>
+            {'Log in here'}
+          </Text>
+        </Text>
+      </View>
     </View>
   );
 };

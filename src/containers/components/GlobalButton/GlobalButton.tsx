@@ -1,7 +1,5 @@
 import * as React from 'react';
-import {StyleSheet, ViewStyle, Text, TouchableOpacity, Image, View} from 'react-native';
-import facebookIcon from '../../../assets/images/facebookIcon.png'
-import googleIcon from '../../../assets/images/googleIcon.png'
+import {StyleSheet, ViewStyle, Text, TouchableOpacity} from 'react-native';
 
 const styles = StyleSheet.create({
     defaultContainer: {
@@ -10,10 +8,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         height: 48,
-        width:320,
-        borderRadius: 8,
-        marginTop:18,
-        marginLeft:21
+        borderRadius: 8
     } as ViewStyle
 });
 
@@ -24,6 +19,7 @@ interface Props{
     backGroundColor: string
     borderColor?: string
     onPressButton: any
+    isEnabled?: boolean
 }
 
 
@@ -31,28 +27,24 @@ const GlobalButton: React.FC<Props>  = ({
                                             innerText,
                                             innerTextColor,
                                             backGroundColor,
-                                            borderColor ,
-                                            onPressButton
+                                            borderColor,
+                                            onPressButton,
+                                            isEnabled
 }) => {
 
     return (
         <TouchableOpacity
+            disabled={isEnabled}
             style={[ styles.defaultContainer ,{backgroundColor: backGroundColor},
                 !borderColor ? null : {borderColor: borderColor, borderWidth: 1} ]}
             onPress={onPressButton}
         >
-            <View style={{paddingRight: 12}}>
-                <Image style= {{width: 12, height: 24}} source={facebookIcon} />
-            </View>
             <Text style={{color: innerTextColor, fontFamily: 'Lato', fontSize: 16}}>
                 {innerText}
             </Text>
-            
         </TouchableOpacity>
 
     );
 };
 
 export default GlobalButton;
-
-
