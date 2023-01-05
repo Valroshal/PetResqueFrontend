@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
     }
 });
-
+//TODO: add Flatlist with DATA
 const HomePage = () => {
 
     const [userName, setUserName] = useState<string>('Bob');

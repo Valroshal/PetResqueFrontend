@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {Image, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle} from "react-native";
 import ThreeDots from '../../../assets/images/ThreeDots.png';
+import DetailsModal from "../DetailsModal";
+import {useState} from "react";
 
 const styles = StyleSheet.create({
     container: {
@@ -25,9 +27,10 @@ interface Props {
 }
 
 const ActivityCard: React.FC<Props> = ({animalName, actionName,date,address}) => {
+    const [modalVisible, setModalVisible] = useState(false);
 
     const showMoreOptions = () => {
-      console.log('openDetails')
+        setModalVisible(true)
     }
 
     return (
@@ -54,6 +57,7 @@ const ActivityCard: React.FC<Props> = ({animalName, actionName,date,address}) =>
             >
                 <Image source={ThreeDots} />
             </TouchableOpacity>
+            <DetailsModal isOpen={modalVisible} />
         </View>
     )
 }
