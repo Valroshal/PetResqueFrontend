@@ -7,7 +7,6 @@ import {
   View,
   ViewStyle,
   Button,
-  Alert,
 } from 'react-native';
 import {Formik} from 'formik';
 import TopLogo from '../components/TopLogo/TopLogo';
@@ -22,7 +21,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     paddingTop: 46,
   } as ViewStyle,
-  innerContainer: {} as ViewStyle,
   header: {
     fontSize: 32,
     fontFamily: 'Lato',
@@ -45,63 +43,60 @@ interface Props {
 const SignUp: React.FC<Props> = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <TopLogo />
+      <View style={{display: 'flex', alignItems: 'center'}}>
+        <TopLogo />
+      </View>
 
-      <View style={[styles.innerContainer, {padding: 21, paddingTop: 37}]}>
+      <View style={{padding: 21, paddingTop: 37}}>
         <Text style={styles.header}>{'Sign up'}</Text>
         <Text style={[styles.subHeader, {paddingTop: 16}]}>
-          {"Looks like you don't have an acount.\nLet's create a new one"}
+          {"Looks like you don't have an account.\nLet's create a new one"}
+        </Text>
+      </View>
+
+      <View style={{paddingTop: 19, paddingLeft: 21, paddingRight: 21}}>
+        <View>
+          <GlobalButton
+            innerText={'Continue'}
+            innerTextColor={'#28230E'}
+            backGroundColor={'#FFDEA8'}
+            onPressButton={() => console.log('Simple Button pressed')}
+          />
+        </View>
+        <View style={{paddingTop: 18}}>
+          <GlobalButton
+            innerText={'Continue'}
+            innerTextColor={'#28230E'}
+            backGroundColor={'#FFDEA8'}
+            onPressButton={() => console.log('Simple Button pressed')}
+          />
+        </View>
+        <Text style={[styles.subHeader, {textAlign: 'center', paddingTop: 18}]}>
+          {'or'}
         </Text>
 
-        <View style={[styles.innerContainer, {paddingTop: 19}]}>
-          <View style={[styles.innerContainer, {paddingTop: 0}]}>
-            <GlobalButton
-              innerText={'Continue'}
-              innerTextColor={'#28230E'}
-              backGroundColor={'#FFDEA8'}
-              onPressButton={() => Alert.alert('Simple Button pressed')}
-            />
-          </View>
-          <View style={[styles.innerContainer, {paddingTop: 18}]}>
-            <GlobalButton
-              innerText={'Continue'}
-              innerTextColor={'#28230E'}
-              backGroundColor={'#FFDEA8'}
-              onPressButton={() => Alert.alert('Simple Button pressed')}
-            />
-          </View>
-          <Text
-            style={[
-              styles.subHeader,
-              {width: 320, height: 34, textAlign: 'center', paddingTop: 18},
-            ]}>
-            {'or'}
-          </Text>
-
-          <View
-            style={[
-              styles.innerContainer,
-              {paddingTop: 18, paddingBottom: 33},
-            ]}>
-            <GlobalButton
-              innerText={'Sign Up with email'}
-              innerTextColor={'#28230E'}
-              backGroundColor={'#F5F5F5'}
-              onPressButton={() => Alert.alert('Simple Button pressed')}
-            />
-          </View>
+        <View style={{paddingTop: 18}}>
+          <GlobalButton
+            innerText={'Sign Up with email'}
+            innerTextColor={'#28230E'}
+            backGroundColor={'#F5F5F5'}
+            onPressButton={() => console.log('Simple Button pressed')}
+          />
         </View>
 
-        <Text style={[styles.subHeader, {}]}>
-          {'Already have an acount? '}
-          <Text
-            onPress={() => {
-              navigation.navigate('Login');
-            }}
-            style={[styles.subHeader, {fontWeight: 'bold'}]}>
-            {'Log in here'}
+        <View
+          style={{display: 'flex', flexDirection: 'column', paddingTop: 33}}>
+          <Text style={[styles.subHeader, {fontSize: 14}]}>
+            {'Already have an acount? '}
+            <Text
+              onPress={() => {
+                navigation.navigate('Login');
+              }}
+              style={[styles.subHeader, {fontWeight: 'bold'}]}>
+              {'Log in here'}
+            </Text>
           </Text>
-        </Text>
+        </View>
       </View>
     </View>
   );
