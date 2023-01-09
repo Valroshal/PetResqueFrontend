@@ -20,7 +20,7 @@ const AddPetFirst: React.FC<Props> = ({navigation}) => {
   return(
       <ScrollView>
         <View style={{paddingHorizontal: 30, paddingTop: 46}}>
-            <View style={{marginBottom: 52}}>
+            <View style={{marginBottom: 52, alignItems: "center"}}>
                 <TopLogo/>
             </View>
             <View style={{marginBottom: 40}}>

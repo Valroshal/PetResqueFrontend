@@ -3,6 +3,8 @@ import {StyleSheet, ViewStyle, TextStyle, Text, View} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
+    height: 88,
+    width: 180,
     alignItems: 'center',
     paddingTop: 5,
     justifyContent: 'center',
