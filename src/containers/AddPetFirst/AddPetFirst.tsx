@@ -2,15 +2,15 @@ import * as React from 'react';
 import {ScrollView, View} from "react-native";
 import TopLogo from "../../components/TopLogo/TopLogo";
 import AddRemoveCard from "./AddRemoveCard/AddRemoveCard";
+import {useNavigation} from "@react-navigation/native";
 
-interface Props{
-    navigation: any
-}
+const AddPetFirst = () => {
 
-const AddPetFirst: React.FC<Props> = ({navigation}) => {
+    const navigation = useNavigation<any>();
     const lostPet = () => {
         console.log("Clicked lost Pet");
-        navigation.navigate('ThankScreen')
+        // navigation.goBack() - here only for example of usage
+        navigation.navigate('Login')
     }
     const foundPet = () => {
         console.log("Clicked FOUND Pet");
